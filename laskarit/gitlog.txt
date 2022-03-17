@@ -112,6 +112,7 @@ Date:   Thu Mar 17 17:13:30 2022 +0200
  tiedosto.txt | 1 +
  toinen.txt   | 0
  2 files changed, 1 insertion(+)
+ 
 
 commit 38ef2f4b8cce1c3e34a2324eb21433c53f05b885
 Author: Oskar <gustosk@gmail.com>
