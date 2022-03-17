@@ -1,0 +1,120 @@
+commit 490544f3227d3dd94a7a17373923454d5fddbb79 (HEAD -> master)
+Author: Oskar <gustosk@gmail.com>
+Date:   Thu Mar 17 17:33:39 2022 +0200
+
+    changes
+
+ tiedostoja/file2.txt                 | 0
+ tiedostoja/{file1.txt => file22.txt} | 0
+ 2 files changed, 0 insertions(+), 0 deletions(-)
+
+commit d5049e6af99a1356d916768ea5fbd71bc5e053cb
+Author: Oskar <gustosk@gmail.com>
+Date:   Thu Mar 17 17:31:35 2022 +0200
+
+    file changes
+
+ tiedostoja/file1.txt | 0
+ tiedostoja/file2.txt | 0
+ tiedostoja/file3.txt | 1 +
+ 3 files changed, 1 insertion(+)
+
+commit 827f593caf4cf7bc01cc2b95f042af76f92ba592
+Author: Oskar <gustosk@gmail.com>
+Date:   Thu Mar 17 17:24:56 2022 +0200
+
+    muutoksia
+
+ eka.txt    | 4 ++--
+ kolmas.txt | 2 +-
+ 2 files changed, 3 insertions(+), 3 deletions(-)
+
+commit aad6c2d2de9c166ce7f6a7c4855cffb936315694
+Author: Oskar <gustosk@gmail.com>
+Date:   Thu Mar 17 17:23:36 2022 +0200
+
+    nimi muutettu
+
+ tiedosto.txt => eka.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit c51cfde3c5d571d305b3582d854db7d7c9860f75
+Author: Oskar <gustosk@gmail.com>
+Date:   Thu Mar 17 17:22:36 2022 +0200
+
+    toinen poistettu
+
+ toinen.txt | 1 -
+ 1 file changed, 1 deletion(-)
+
+commit 203b5d7dd319e8fa8697c9a37a03411e79d919f0
+Author: Oskar <gustosk@gmail.com>
+Date:   Thu Mar 17 17:20:38 2022 +0200
+
+    lorem ipsum2
+
+ tiedosto.txt | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
+
+commit b3f6416ceed0cde6c5f3c77425fa8a5a3c8139ca
+Author: Oskar <gustosk@gmail.com>
+Date:   Thu Mar 17 17:19:54 2022 +0200
+...skipping...
+
+    toinen poistettu
+
+ toinen.txt | 1 -
+ 1 file changed, 1 deletion(-)
+
+commit 203b5d7dd319e8fa8697c9a37a03411e79d919f0
+Author: Oskar <gustosk@gmail.com>
+Date:   Thu Mar 17 17:20:38 2022 +0200
+
+    lorem ipsum2
+
+ tiedosto.txt | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
+
+commit b3f6416ceed0cde6c5f3c77425fa8a5a3c8139ca
+Author: Oskar <gustosk@gmail.com>
+Date:   Thu Mar 17 17:19:54 2022 +0200
+
+    lorem ipsum
+
+ tiedosto.txt | 10 +++++++++-
+ 1 file changed, 9 insertions(+), 1 deletion(-)
+
+commit 61fce38df504c549a269e1a5e39778f117461208
+Author: Oskar <gustosk@gmail.com>
+Date:   Thu Mar 17 17:17:55 2022 +0200
+
+    lis<C3><A4>tty kansio
+
+ stuff/jokinTiedosto.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit 11e88dc63b0b92fb6e0d5a0fda5ec9db8b066e87
+Author: Oskar <gustosk@gmail.com>
+Date:   Thu Mar 17 17:16:30 2022 +0200
+
+    kolmas muutos
+
+ kolmas.txt | 1 +
+ toinen.txt | 1 +
+ 2 files changed, 2 insertions(+)
+
+commit b9af2b8097014a4ad7cb71dbc5c8601f9a243b20
+Author: Oskar <gustosk@gmail.com>
+Date:   Thu Mar 17 17:13:30 2022 +0200
+
+    muutos ja lis<C3><A4>ys
+
+ tiedosto.txt | 1 +
+ toinen.txt   | 0
+ 2 files changed, 1 insertion(+)
+
+commit 38ef2f4b8cce1c3e34a2324eb21433c53f05b885
+Author: Oskar <gustosk@gmail.com>
+Date:   Thu Mar 17 17:09:47 2022 +0200
+
+    tiedosto.txt luotu
