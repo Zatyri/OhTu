@@ -1,4 +1,4 @@
-## Sovelluslogiikka
+## Luokkakaavio
 
 ```mermaid
  classDiagram
@@ -43,10 +43,21 @@
 	class Pelaaja{
 		+Int rahaMaara
 		}
-	
-		
-	
-		
-		
- 
+```
+
+## Sekvenssikaavio Machine
+
+```mermaid
+sequenceDiagram
+	Caller->>Machine: Ohjelman ulkopuolinen kutsuja
+	Machine->>FuelTank: new FuelTank()
+	Machine->>FuelTank: tank.fill(40)
+	Machine->>Engine: new Engine(tank)
+	Caller->>Machine: drive()
+	Machine->>Engine: start()
+	Engine->>FuelTank: consume(5)
+	Machine->> Engine: isRunning()
+	Engine->> Machine: boolean
+	Machine->>Engine: useEnergy()
+	Engine->>FuelTank: consume(10)
 ```
