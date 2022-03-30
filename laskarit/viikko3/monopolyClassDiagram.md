@@ -1,4 +1,4 @@
-## Luokkakaavio
+## Luokkakaavio Monopoli
 
 ```mermaid
  classDiagram
@@ -60,4 +60,33 @@ sequenceDiagram
 	Engine->> Machine: boolean
 	Machine->>Engine: useEnergy()
 	Engine->>FuelTank: consume(10)
+```
+
+## Sekvenssikaavio HSL
+```mermaid
+sequenceDiagram
+	Main->>HKLLaitehallinto: new HKLLaitehallinto()
+	Main->>Lataajalaite: rautatietori = new Lataajalaite()
+	Main->>Lukijalaite: ratikka6 = new Lukijalaite()
+	Main->>Lukijalaite: bussi244 = new Lukijalaite()
+	Main->>HKLLaitehallinto: lisaaLataaja(rautatietori)
+	Main->>HKLLaitehallinto: lisaaLukija(ratikka6)
+	Main->>HKLLaitehallinto: lisaaLukija(bussi244)
+	Main->>Kioski: lippuluukku = new Kioski()
+	Main->>Kioski: artonKortti = lippuLuukku.ostaMatkakortti("Arto")
+	Kioski->>Matkakortti: uusiKortti = new Matkakortti("Arto")
+	Kioski->>Main: uusiKortti
+	Main->>Lataajalaite: lataaArvoa(artonKortti, 3)
+	Lataajalaite->>Matkakortti: artonKortti.kasvataArvoa(3)
+	Main->>Lukijalaite: ratikka6.ostaLippu(artonKortti, 0)
+	Lukijalaite->>Matkakortti: artonKortti.getArvo()
+	Matkakortti->>Lukijalaite: double (3)
+	Lukijalaite->>Matkakortti: artonKortti.vahennaArvoa(1.5)
+	Lukijalaite->>Main: boolean (true)
+	Main->>Lukijalaite: bussi244.ostaLippu(artonKortti, 2)
+	Lukijalaite->>Matkakortti: artonKortti.getArvo()
+	Matkakortti->>Lukijalaite: double (1.5)
+	Lukijalaite->>Main: boolean (false)
+
+
 ```
