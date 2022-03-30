@@ -66,15 +66,21 @@ sequenceDiagram
 ```mermaid
 sequenceDiagram
 	Main->>HKLLaitehallinto: new HKLLaitehallinto()
+	HKLLaitehallinto->>Main: HKLLaitehallinto
 	Main->>Lataajalaite: rautatietori = new Lataajalaite()
+	Lataajalaite->>Main: Lataajalaite
 	Main->>Lukijalaite: ratikka6 = new Lukijalaite()
+	Lukijalaite->>Main: Lukijalaite
 	Main->>Lukijalaite: bussi244 = new Lukijalaite()
+	Lukijalaite->>Main: Lukijalaite
 	Main->>HKLLaitehallinto: lisaaLataaja(rautatietori)
 	Main->>HKLLaitehallinto: lisaaLukija(ratikka6)
 	Main->>HKLLaitehallinto: lisaaLukija(bussi244)
 	Main->>Kioski: lippuluukku = new Kioski()
+	Kioski->>Main: Kioski
 	Main->>Kioski: artonKortti = lippuLuukku.ostaMatkakortti("Arto")
 	Kioski->>Matkakortti: uusiKortti = new Matkakortti("Arto")
+	Matkakortti->>Kioski: Matkakortti
 	Kioski->>Main: uusiKortti
 	Main->>Lataajalaite: lataaArvoa(artonKortti, 3)
 	Lataajalaite->>Matkakortti: artonKortti.kasvataArvoa(3)
