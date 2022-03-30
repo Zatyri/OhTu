@@ -22,23 +22,23 @@
 	class Ruutu{
 		+Ruutu seuraavaRuutu
 		+Ruutu edellinenRuutu
-		+jokinToiminto() : toiminto
+		+jokinToiminto() toiminto
 		}
 	class Katu {
 		+String nimi
 		+Int taloja
 		+Boolean onHotelli
 		+Pelaaja omistaja
-		+mahtuukoTaloja() : Boolean
-		+rakennaTalo() : void
-		+rakennaHotelli() : void
+		+mahtuukoTaloja() Boolean
+		+rakennaTalo() void
+		+rakennaHotelli() void
 		}
 	class Peli{
 		+Ruutu Aloitusruutu
 		+Ruutu Vankila
 		}
 	class Kortti{
-		+jokinToiminto() : toiminto
+		+jokinToiminto() toiminto
 		}
 	class Pelaaja{
 		+Int rahaMaara
