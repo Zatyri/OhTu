@@ -51,7 +51,7 @@
 sequenceDiagram
 	Caller->>Machine: Ohjelman ulkopuolinen kutsuja
 	Machine->>FuelTank: new FuelTank()
-	FualTank->>Machine: FuelTank
+	FuelTank->>Machine: FuelTank
 	Machine->>FuelTank: tank.fill(40)
 	Machine->>Engine: new Engine(tank)
 	Engine->>Machine: Engine
