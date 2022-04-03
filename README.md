@@ -15,3 +15,7 @@ This repository is for course *TKT20002* at **Helsinki University**
 
 ## Viikko 2
 [testikattavuus.png](https://github.com/Zatyri/ot-harjoitustyo/blob/master/laskarit/viikko2/testikattavuus.png)
+
+## Viikko 3
+
+[luokkaJaSekvenssikaaviot](https://github.com/Zatyri/ot-harjoitustyo/blob/master/laskarit/viikko3/ClassAndSequenceDiagram.md)
