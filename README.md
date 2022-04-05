@@ -26,7 +26,7 @@ This repository is for course *TKT20002* at **Helsinki University**
 
 Mene ensin kansioon "Huoltosovellus"
 ```
-cd Huoltosovellus
+cd Huoltosovellus/
 ```
 
 Ohjelman käynnistys
