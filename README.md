@@ -24,6 +24,11 @@ This repository is for course *TKT20002* at **Helsinki University**
 
 ## Komentorivitoiminnot
 
+Mene ensin kansioon "Huoltosovellus"
+```
+cd Huoltosovellus
+```
+
 Ohjelman käynnistys
 ```
 mvn compile exec:java -Dexec.mainClass=pienkiinteistohuoltosovellus.ui.UserInterface
