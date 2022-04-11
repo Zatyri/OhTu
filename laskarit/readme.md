@@ -10,10 +10,3 @@
 # Viikko 3
 
 [luokkaJaSekvenssikaaviot](https://github.com/Zatyri/ot-harjoitustyo/blob/master/laskarit/viikko3/ClassAndSequenceDiagram.md)
-
-## Harjoitustyön dokumetaatio
-[vaatimusmaarittely.md](https://github.com/Zatyri/ot-harjoitustyo/blob/master/dokumentaatio/vaatimusmaarittely.md)
-
-[tuntikirjanpito.md](https://github.com/Zatyri/ot-harjoitustyo/blob/master/dokumentaatio/tuntikirjanpito.md)
-
-[changelog.md](https://github.com/Zatyri/ot-harjoitustyo/blob/master/dokumentaatio/changelog.md)
