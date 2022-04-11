@@ -5,8 +5,8 @@ classDiagram
 	MaintenanceFileService <|-- MaintenanceFile
 	MaintenanceFileService <|-- OneTimeTask
 	MaintenanceFileService <|-- RecurringTask
-	OneTimeTask <|-- MaintenanceTask
-	RecurringTask <|-- MaintenanceTask
+	OneTimeTask <|-- MaintenanceTask : extends
+	RecurringTask <|-- MaintenanceTask : extends
 	MaintenanceFile <|-- MaintenanceTask
 	class MaintenanceFile{
 		+ArrayList<MaintenanceTask> tasks
