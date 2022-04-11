@@ -1,4 +1,4 @@
-##Luokkakaavio
+## Luokkakaavio
 
 ```mermaid
 classDiagram
