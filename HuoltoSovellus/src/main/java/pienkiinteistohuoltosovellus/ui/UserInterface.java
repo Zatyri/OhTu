@@ -1,5 +1,7 @@
 package pienkiinteistohuoltosovellus.ui;
 
+import domain.MaintenanceFile;
+import domain.MaintenanceFileService;
 import java.io.File;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -32,19 +34,18 @@ public class UserInterface extends Application {
 
     private Scene mainScene;
     private BorderPane root;
-    private Pane paneFile, paneView, paneEdit, paneReport;
+    private MaintenanceFile maintenanceFile;
 
     @Override
     public void init() throws Exception {
         root = new BorderPane();
-        paneView = CreatePaneView();
-        paneEdit = CreatePaneEdit();
+        maintenanceFile = MaintenanceFileService.getMaintenanceFile();
     }
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        root.setTop(CreateMenu());
-        root.setCenter(paneView);
+        root.setTop(createMenu());
+        root.setCenter(ViewPane.getInstance());
         mainScene = new Scene(root, 960, 600);
 
         primaryStage.setMaximized(true);
@@ -52,87 +53,31 @@ public class UserInterface extends Application {
 
         primaryStage.show();
     }
-    
-    private HBox CreateMenu(){
-        
-        Button file = new Button("File");
-        Button edit = new Button("Edit");
-        Button view = new Button("view");
-        Button report = new Button("Report");
-        
-        file.setOnAction((final ActionEvent e) -> {
-            root.setCenter(paneFile);
-        });        
-        edit.setOnAction((final ActionEvent e) -> {
-            root.setCenter(paneEdit);
+
+    private HBox createMenu() {
+
+        Button fileButton = new Button("File");
+        Button editButton = new Button("Edit");
+        Button viewButton = new Button("view");
+        Button reportButton = new Button("Report");
+
+        fileButton.setOnAction((final ActionEvent e) -> {
+            root.setCenter(FilePane.getInstance());
         });
-        view.setOnAction((final ActionEvent e) -> {
-            root.setCenter(paneView);
+        editButton.setOnAction((final ActionEvent e) -> {
+            root.setCenter(EditPane.getInstance());
         });
-        report.setOnAction((final ActionEvent e) -> {
-            root.setCenter(paneReport);
+        viewButton.setOnAction((final ActionEvent e) -> {
+            root.setCenter(ViewPane.getInstance());
         });
-        
-        HBox menu = new HBox(file, edit, view, report);
-        
+        reportButton.setOnAction((final ActionEvent e) -> {
+            root.setCenter(ReportPane.getInstance());
+        });
+
+        HBox menu = new HBox(fileButton, editButton, viewButton, reportButton);
+
         return menu;
     }
-
-//    private MenuBar CreateMenuBar() {
-//        MenuBar menuBar = new MenuBar();
-//
-//        Menu file = new Menu("File");
-//        Menu edit = new Menu("Edit");
-//        Menu view = new Menu("view");
-//        Menu report = new Menu("Report");
-//
-//        MenuItem open = new MenuItem("Open");
-//        MenuItem create = new MenuItem("Create New");
-//
-//        open.setOnAction((final ActionEvent e) -> {
-//            fileChooser.setTitle("Open maintnance file");
-//            File document = fileChooser.showOpenDialog(new Stage());
-//            if (document != null) {
-//                openFile(document);
-//            }
-//        });
-//        file.getItems().add(open);
-//        file.getItems().add(create);
-//        
-//        MenuItem editTask = new MenuItem("Edit tasks");
-//        
-//        editTask.setOnAction((final ActionEvent e) -> {
-//            root.setCenter(paneEdit);            
-//            mainScene.setRoot(root);
-//            Stage stage = (Stage)(mainScene.getWindow());
-//            stage.setScene(mainScene);
-//            stage.show();
-//        });
-//        
-//        edit.getItems().add(editTask);
-//
-//
-//        menuBar.getMenus().add(file);
-//        menuBar.getMenus().add(edit);
-//        menuBar.getMenus().add(view);
-//        menuBar.getMenus().add(report);
-//
-//        return menuBar;
-//    }
-    
-    private Pane CreatePaneView(){
-        Pane pane = new Pane();
-        pane.setBackground(new Background(new BackgroundFill(Color.RED, CornerRadii.EMPTY, Insets.EMPTY)));        
-        return pane;
-    }
-    
-    private Pane CreatePaneEdit(){
-        Pane pane = new Pane();
-        pane.setBackground(new Background(new BackgroundFill(Color.BLUE, CornerRadii.EMPTY, Insets.EMPTY))); 
-        return pane;
-    }
-    
-    
 
     private void openFile(File file) {
 

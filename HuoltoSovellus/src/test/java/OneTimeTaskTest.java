@@ -26,7 +26,7 @@ public class OneTimeTaskTest {
     @Before
     public void setUp() {
         String name = "test task";
-        task = new OneTimeTask(name);
+        task = new OneTimeTask(name, LocalDate.now());
     }
 
     @After
@@ -37,7 +37,7 @@ public class OneTimeTaskTest {
     @Test
     public void taskCreationTest() {
         String name = "test task";
-        OneTimeTask task1 = new OneTimeTask(name);
+        OneTimeTask task1 = new OneTimeTask(name, LocalDate.now());
         assertEquals(task1.getClass(), OneTimeTask.class);
         assertEquals(task1.getName(), name);
         assertEquals(task1.getCreationDate(), LocalDate.now());

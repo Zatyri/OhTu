@@ -1,9 +1,11 @@
 package domain;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
 public class MaintenanceTask {
 
+    private UUID id;
     private String name;
     private LocalDate creationDate;
     private LocalDate completedOnDate;
@@ -11,9 +13,17 @@ public class MaintenanceTask {
     private Boolean isCompleted;
 
     public MaintenanceTask(String name) {
+        id = UUID.randomUUID();
         this.name = name;
         isCompleted = false;
         creationDate = LocalDate.now();
+    }
+
+    public MaintenanceTask(String name, LocalDate creationDate) {
+        id = UUID.randomUUID();
+        this.name = name;
+        isCompleted = false;
+        this.creationDate = creationDate;
     }
 
     /**
@@ -87,9 +97,6 @@ public class MaintenanceTask {
         }
     }
 
-    /**
-     * @param Sets completed task from this date
-     */
     public void setCompletedNow() {
         if (!isCompleted) {
             completedOnDate = LocalDate.now();
@@ -97,13 +104,24 @@ public class MaintenanceTask {
         }
     }
 
-    /**
-     * @param Changes task to not completed
-     */
     public void setAsNotCompleted() {
         if (isCompleted) {
             completedOnDate = null;
             isCompleted = false;
         }
+    }
+
+    /**
+     * @param creationDate the creationDate to set
+     */
+    public void setCreationDate(LocalDate creationDate) {
+        this.creationDate = creationDate;
+    }
+
+    /**
+     * @return the ID
+     */
+    public UUID getID() {
+        return id;
     }
 }

@@ -16,7 +16,7 @@ Sovelluksen työpöytä versiossa ei tule olemaan erillisiä käyttäjiä. Idean
 Sovellus rakennetaan siten, että ylhäällä on navigointipaneeli jossa voidaan vaihtaa eri näkymien välillä.
 Näkymät ovat:
 - File, jossa voi luoda uusi huoltosuunnitelma tai ladata olemassa oleva
-- Edit, jossa voidaan lisätä uusia huoltotoimenpiteitä ja muokata olemassa olevia
+- Edit, jossa voidaan lisätä uusia huoltotoimenpiteitä ja muokata olemassa olevia (Minimun Viable Product (MVP) tehty)
 - View, jossa voidaan katsella tulevia huoltotoimenpiteitä ja kuitata ne tehdyksi
 - Report, jossa voidaan luoda raportti tehdyistä huoltotoimenpiteistä
 
@@ -26,7 +26,7 @@ Näkymät ovat:
 ## Perusversion tarjoama toiminnallisuus
 - käyttäjä voi 
 	- luoda uuden huoltosuunnitelman tai ladata olemassa oleva
-	- lisätä kertaluontoisia ja toistuvia huoltotoimenpiteitä huoltosuunnitelmaansuunnitelmaan
+	- lisätä kertaluontoisia ja toistuvia huoltotoimenpiteitä huoltosuunnitelmaansuunnitelmaan (tehty)
 	- kuitata huoltotoimenpiteet tehdyksi
 	- listata tulevia huoltotoimenpiteitä
 	- luoda yhteenveto suoritetuista huoltotoimenpiteistä

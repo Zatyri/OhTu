@@ -1,11 +1,13 @@
 package domain;
 
+import java.time.LocalDate;
+
 public class RecurringTask extends MaintenanceTask {
 
     private int recurringIntervalMonths;
 
-    public RecurringTask(String name, int recurringIntervalInMonths) {
-        super(name);
+    public RecurringTask(String name, LocalDate creationDate, int recurringIntervalInMonths) {
+        super(name, creationDate);
         recurringIntervalMonths = recurringIntervalInMonths;
     }
 
