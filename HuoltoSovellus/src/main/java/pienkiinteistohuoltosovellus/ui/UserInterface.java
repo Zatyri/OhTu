@@ -48,16 +48,7 @@ public class UserInterface extends Application {
         Button editButton = new Button("Edit");
         Button viewButton = new Button("view");
         Button reportButton = new Button("Report");
-        
-        editButton.setStyle("-fx-skin: com.sun.javafx.scene.control.skin.ButtonSkin;" +
-    "-fx-background-color: -fx-shadow-highlight-color, -fx-outer-border, -fx-inner-border, -fx-body-color;"+
-    "-fx-background-insets: 0 0 -1 0, 0, 1, 2;"+
-    "-fx-background-radius: 5, 5, 4, 3;"+
-    "-fx-padding: 0.166667em 0.833333em 0.25em 0.833333em; /* 2 10 3 10 */"+
-    "-fx-text-fill: -fx-text-base-color;"+
-    "-fx-alignment: CENTER;"+
-    "-fx-content-display: LEFT;)");
-        
+                
         fileButton.setOnAction((final ActionEvent e) -> {
             root.setCenter(FilePane.getInstance());
         });
