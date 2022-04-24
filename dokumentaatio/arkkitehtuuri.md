@@ -32,3 +32,24 @@ classDiagram
 		}
 
 ```
+
+## Käynnistyksen sekvenssikaavio
+
+
+```mermaid
+sequenceDiagram
+	UserInterface->>MaintenanceFileService:getDefaultMaintenanceFile()
+	MaintenanceFileService->>DatabaseController:getDefaultMaintenanceFile()
+	DatabaseController->>Database:sql query
+	Database->>DatabaseController:ResultSet
+	DatabaseController->>MaintenanceFileService:String[]
+	MaintenanceFileService->>MaintenanceFile:New MaintenanceFile()
+	MaintenanceFile->>MaintenanceFileService:MaintenanceFile
+	MaintenanceFileService->>DatabaseController:getMaintenanceFileTasks()
+	DatabaseController->>Database:sql query
+	Database->>DatabaseController:ResultSet
+	DatabaseController->>MaintenanceFileService:ResultSet
+	MaintenanceFileService->>MaintenanceFile:getTasks()
+	MaintenanceFile->>MaintenanceFileService:tasks
+	MaintenanceFileService->>UserInterface:MaintenanceFile
+```
