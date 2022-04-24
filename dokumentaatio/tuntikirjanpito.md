@@ -7,6 +7,8 @@
 |8.4|1|checkstylen käyttöönotto ja sen esittämien "virheiden" korjausta|
 |9.4|2|käyttöliittymä päänäkymien refaktorointi singletoneiksi
 |10.4|3|kehitystyötä editView näkymässä|
+|15.4|2|kehitystyötä view näkymässä|
+|20.4|4|kehitystyötä file näkymässä + tietokanta aloitettu|
+|24.4|5|tietokantakehitystä|
 
-
-Yhteensä 14 tuntia
+Yhteensä 25 tuntia
