@@ -23,6 +23,11 @@ Ohjelman käynnistys
 mvn compile exec:java -Dexec.mainClass=pienkiinteistohuoltosovellus.ui.UserInterface
 ```
 
+jar tiedoston luonti
+```
+mvn package
+```
+
 # Testaus
 
 Ohjelman testaus
