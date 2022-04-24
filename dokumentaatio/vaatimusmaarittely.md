@@ -25,10 +25,10 @@ Näkymät ovat:
 
 ## Perusversion tarjoama toiminnallisuus
 - käyttäjä voi 
-	- luoda uuden huoltosuunnitelman tai ladata olemassa oleva
+	- luoda uuden huoltosuunnitelman tai ladata olemassa oleva (tehty)
 	- lisätä kertaluontoisia ja toistuvia huoltotoimenpiteitä huoltosuunnitelmaansuunnitelmaan (tehty)
 	- kuitata huoltotoimenpiteet tehdyksi
-	- listata tulevia huoltotoimenpiteitä
+	- listata tulevia huoltotoimenpiteitä (tehty osittain)
 	- luoda yhteenveto suoritetuista huoltotoimenpiteistä
 - luodaan valmiita huoltotoimenpideitä
 	
