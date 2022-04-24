@@ -41,6 +41,12 @@ public class MaintenanceTaskTest {
         assertEquals(task1.getName(), name);
         assertEquals(task1.getCreationDate(), LocalDate.now());
         assertEquals(task1.getIsCompleted(), false);
+        task1.setName("new name");
+        task1.setCreationDate(LocalDate.parse("2022-10-10"));
+        assertEquals(task1.getName(), "new name");
+        assertEquals(task1.getCreationDate(), LocalDate.parse("2022-10-10"));
+        task1.setName("");
+        assertEquals(task1.getName(), "new name");
     }
 
     @Test

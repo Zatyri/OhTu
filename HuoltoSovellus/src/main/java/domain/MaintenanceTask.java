@@ -19,11 +19,21 @@ public class MaintenanceTask {
         creationDate = LocalDate.now();
     }
 
-    public MaintenanceTask(String name, LocalDate creationDate) {
+    public MaintenanceTask(String name, LocalDate creationDate, LocalDate dueDate) {
         id = UUID.randomUUID();
         this.name = name;
         isCompleted = false;
         this.creationDate = creationDate;
+        this.dueDate = dueDate;
+    }
+
+    public MaintenanceTask(UUID uuid, String name, LocalDate creationDate, LocalDate completedOnDate, LocalDate dueDate, Boolean isCompleted) {
+        id = uuid;
+        this.name = name;
+        this.isCompleted = isCompleted;
+        this.creationDate = creationDate;
+        this.dueDate = dueDate;
+        this.completedOnDate = completedOnDate;
     }
 
     /**

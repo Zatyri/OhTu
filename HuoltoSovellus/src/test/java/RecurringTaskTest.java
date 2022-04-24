@@ -25,7 +25,7 @@ public class RecurringTaskTest {
 
     @Before
     public void setUp() {
-        task = new RecurringTask("test task", LocalDate.now(), 1);
+        task = new RecurringTask("test task", LocalDate.now(), 1, LocalDate.now());
     }
 
     @After

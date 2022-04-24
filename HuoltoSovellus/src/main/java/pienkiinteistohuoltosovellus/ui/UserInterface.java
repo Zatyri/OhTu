@@ -27,7 +27,7 @@ public class UserInterface extends Application {
     @Override
     public void init() throws Exception {
         root = new BorderPane();
-        maintenanceFile = MaintenanceFileService.getMaintenanceFile();
+        maintenanceFile = MaintenanceFileService.getDefaultMaintenanceFile();
     }
 
     @Override

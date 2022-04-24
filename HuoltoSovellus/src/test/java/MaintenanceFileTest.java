@@ -4,6 +4,8 @@ import domain.MaintenanceTask;
 import domain.OneTimeTask;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.UUID;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -28,7 +30,7 @@ public class MaintenanceFileTest {
 
     @Before
     public void setUp() {
-        file = new MaintenanceFile();
+        file = new MaintenanceFile(UUID.randomUUID(), "test file");
 
     }
 
@@ -40,22 +42,22 @@ public class MaintenanceFileTest {
 
     @Test
     public void canCreateMaintenancFile() {
-        MaintenanceFile maintenanceFile = new MaintenanceFile();
+        MaintenanceFile maintenanceFile = new MaintenanceFile(UUID.randomUUID(), "test file");
         assertEquals(maintenanceFile.getClass(), MaintenanceFile.class);
     }
 
     @Test
     public void canAddTasks() {
-        ArrayList<MaintenanceTask> tasks = file.getTasks();
+        HashMap<UUID, MaintenanceTask> tasks = file.getTasks();
         assertEquals(tasks.size(), 0);
 
-        MaintenanceTask task2 = new OneTimeTask("test task2", LocalDate.now());
-        file.addTask(new OneTimeTask("test task1", LocalDate.now()));
+        MaintenanceTask task2 = new OneTimeTask("test task2", LocalDate.now(), LocalDate.now());
+        file.addTask(new OneTimeTask("test task1", LocalDate.now(), LocalDate.now()));
         file.addTask(task2);
-        file.addTask(new OneTimeTask("test task3", LocalDate.now()));
+        file.addTask(new OneTimeTask("test task3", LocalDate.now(), LocalDate.now()));
         tasks = file.getTasks();
         assertEquals(tasks.size(), 3);
-        assertEquals(tasks.get(1), task2);
+        assertEquals(tasks.get(task2.getID()), task2);
 
     }
 }
