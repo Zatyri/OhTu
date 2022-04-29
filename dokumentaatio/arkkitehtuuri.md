@@ -7,13 +7,13 @@ DatabaseController sisältää kaiken tietokantaan liittyvän logiikan. Maintena
 
  ```mermaid
  classDiagram
- 	MaintenanceFileService <- MaintenanceFile
-	MaintenanceFileService <- OneTimeTask
-	MaintenanceFileService <- RecurringTask
-	OneTimeTask <- MaintenanceTask
-	RecurringTask <- MaintenanceTask
-	MaintenanceFileService<->ui
-	DatabaseController<->MaintenanceFileService
+ 	MaintenanceFileService -- MaintenanceFile
+	MaintenanceFileService -- OneTimeTask
+	MaintenanceFileService -- RecurringTask
+	OneTimeTask -- MaintenanceTask
+	RecurringTask -- MaintenanceTask
+	MaintenanceFileService -- ui
+	DatabaseController -- MaintenanceFileService
  
  ```
 ## Luokkakaavio
