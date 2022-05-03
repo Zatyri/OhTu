@@ -36,6 +36,11 @@ jar tiedoston luonti
 mvn package
 ```
 
+JavaDoc luonti
+```
+mvn javadoc:javadoc
+```
+
 # Testaus
 
 Ohjelman testaus
