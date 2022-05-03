@@ -6,6 +6,9 @@ import java.util.UUID;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+/**
+ * MaintenanceFile is a file containing all the MaintenanceTask-tasks
+ */
 public class MaintenanceFile {
 
     private UUID id;
@@ -25,20 +28,31 @@ public class MaintenanceFile {
     }
 
     /**
-     * @return the tasks
+     * Get all tasks
+     *
+     * @return HashMap of all tasks
      */
     public HashMap<UUID, MaintenanceTask> getTasks() {
         return tasks;
     }
 
     /**
-     * @param task the tasks to add to list
+     * Add Task to MaintenanceFile
+     * Please note that this change is permanent only after separately saving the MaintenanceFile
+     *
+     * @param task MaintenanceTask to add to MaintenanceFile
      */
     public void addTask(MaintenanceTask task) {
         tasks.put(task.getID(), task);
         addedTasksIds.add(task.getID());
     }
 
+    /**
+     * Delete Task from MaintenanceFile
+     * Please note that this change is permanent only after separately saving the MaintenanceFile
+     *
+     * @param task MaintenanceTask to delete from MaintenanceFile
+     */
     public void deleteTask(MaintenanceTask task) {
         deletedTaskIds.add(task.getID());
         tasks.remove(task.getID());
@@ -70,6 +84,9 @@ public class MaintenanceFile {
     }
 
     /**
+     * This method returns all deleted task ID's in this session
+     * Used when saving the MaintenanceFile to database and removing deleted tasks from the database
+     * 
      * @return the deletedTaskIds
      */
     public ArrayList<UUID> getDeletedTaskIds() {
@@ -77,6 +94,9 @@ public class MaintenanceFile {
     }
 
     /**
+     * This method returns all modified task ID's in this session
+     * Used when saving the MaintenanceFile to database and updating modified tasks in the database
+     * 
      * @return the modifiedTaskIds
      */
     public ArrayList<UUID> getModifiedTaskIds() {
@@ -84,6 +104,8 @@ public class MaintenanceFile {
     }
 
     /**
+     * This method returns all added task ID's in this session
+     * Used when saving the MaintenanceFile to database and adding new tasks to the database
      * @return the addedTasksIds
      */
     public ArrayList<UUID> getAddedTasksIds() {

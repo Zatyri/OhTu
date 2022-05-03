@@ -3,6 +3,9 @@ package domain;
 import java.time.LocalDate;
 import java.util.UUID;
 
+/**
+ * Class for recurring tasks
+ */
 public class RecurringTask extends MaintenanceTask {
 
     private int recurringIntervalMonths;

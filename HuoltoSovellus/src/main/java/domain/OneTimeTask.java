@@ -3,6 +3,9 @@ package domain;
 import java.time.LocalDate;
 import java.util.UUID;
 
+/**
+ * Class for one time tasks
+ */
 public class OneTimeTask extends MaintenanceTask {
 
     public OneTimeTask(String name, LocalDate creationDate, LocalDate dueDate) {

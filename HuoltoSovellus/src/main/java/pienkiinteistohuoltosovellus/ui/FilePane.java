@@ -5,6 +5,7 @@ import domain.MaintenanceFileService;
 import java.util.ArrayList;
 import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
@@ -13,6 +14,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 public class FilePane {
 
@@ -82,6 +84,7 @@ public class FilePane {
 
             nameTextField.setText("");
             isDefaultCheckBox.setSelected(false);
+            updateStageTitle(e);
         });
 
         return new VBox(label, nameHBox, isDefaultCheckBox, addNewMaintenanceFileButton);
@@ -97,12 +100,19 @@ public class FilePane {
             Button selectMaintenanceFileButton = new Button("Select maintenance file");
             selectMaintenanceFileButton.setOnAction((final ActionEvent e) -> {
                 MaintenanceFileService.getmaintenanceFile(file.getId());
+                updateStageTitle(e);
             });
             VBox maintenanceFileVBox = new VBox(nameLabel, selectMaintenanceFileButton);
             maintenanceFilesVBox.getChildren().add(maintenanceFileVBox);
         });
 
         return maintenanceFilesVBox;
+    }
+
+    private static void updateStageTitle(ActionEvent e) {
+        Node node = (Node) e.getSource();
+        Stage stage = (Stage) node.getScene().getWindow();
+        stage.setTitle("Mainetnance file: " + MaintenanceFileService.getDefaultMaintenanceFile().getName());
     }
 
 }

@@ -13,6 +13,9 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import javafx.collections.ObservableList;
 
+/**
+ * Class to allow ui to access data
+ */
 public class MaintenanceFileService {
 
     private static MaintenanceFile maintenanceFile;
@@ -32,6 +35,12 @@ public class MaintenanceFileService {
         // get tasks with result[2]
     }
 
+    /**
+     * Gets the default maintenance file from the database If default database
+     * is not found is a new unnamed maintenance file generated
+     *
+     * @return the initialized maintenance file
+     */
     public static MaintenanceFile getDefaultMaintenanceFile() {
         if (maintenanceFile == null) {
             initializeMaintenanceFile();
@@ -39,6 +48,13 @@ public class MaintenanceFileService {
         return maintenanceFile;
     }
 
+    /**
+     * Gets a specified maintenance file from the database
+     *
+     * @param uuid the id of the maintenance file to retrieve
+     * @return the retrieved maintenance file. Returns the current one if
+     * maintenance file is not found in database
+     */
     public static MaintenanceFile getmaintenanceFile(UUID uuid) {
         String[] result = DatabaseController.getMaintenanceFile(uuid);
 
@@ -50,6 +66,11 @@ public class MaintenanceFileService {
         return maintenanceFile;
     }
 
+    /**
+     * Gets the all maintenance files from the database
+     *
+     * @return ArrayList containing maintenance files
+     */
     public static ArrayList<MaintenanceFile> getAllMaintenanceFiles() {
         ArrayList<MaintenanceFile> maintenanceFiles = new ArrayList<>();
 
@@ -66,6 +87,14 @@ public class MaintenanceFileService {
         return maintenanceFiles;
     }
 
+    /**
+     * Creates a new maintenance file
+     *
+     *
+     * @param name name of the maintenance file
+     * @param isDefault default maintenance file will be shown when opening
+     * application
+     */
     public static void createMaintenanceFile(String name, Boolean isDefault) {
         UUID id = UUID.randomUUID();
         int isDefaultInt = isDefault ? 1 : 0;
@@ -74,7 +103,17 @@ public class MaintenanceFileService {
         DatabaseController.addMaintenanceFile(id, name, isDefaultInt);
     }
 
-    public static void createTask(String name, LocalDate creationDate, LocalDate dueDate, int recurringTime) {
+    /**
+     * Creates a new maintenance task and adds it to the active maintenance file
+     *
+     * @param name name of the maintenance file
+     * @param creationDate date when task was created
+     * @param dueDate date when the task due date is
+     * @param recurringTime number of months between recurrences
+     * @return UUID of the created task
+     *
+     */
+    public static UUID createTask(String name, LocalDate creationDate, LocalDate dueDate, int recurringTime) {
 
         MaintenanceTask task;
         if (recurringTime > 0) {
@@ -83,14 +122,28 @@ public class MaintenanceFileService {
             task = new OneTimeTask(name, creationDate, dueDate);
         }
         maintenanceFile.addTask(task);
+        
+        return task.getID();
+    }
 
+    public static ArrayList<UUID> getModifiedTasks() {
+        return new ArrayList<>(maintenanceFile.getModifiedTaskIds());
     }
 
     public static ArrayList<MaintenanceTask> getTasks() {
-
+        if(maintenanceFile == null){
+            return new ArrayList<>();
+        }
         return new ArrayList<>(maintenanceFile.getTasks().values());
     }
 
+    /**
+     * Gets tasks with due date from specific month
+     *
+     * @param year the year of the due date
+     * @param month the month of the due date
+     * @return list of maintenance tasks
+     */
     public static List<MaintenanceTask> getTasks(int year, Month month) {
         return maintenanceFile.getTasks().values().stream()
                 .filter(task -> task.getDueDate().getYear() == year)
@@ -102,15 +155,24 @@ public class MaintenanceFileService {
         maintenanceFile.deleteTask(taskToRemove);
     }
 
-    public static void updateTask(MaintenanceTask task, String updatedName, LocalDate updatedCreationDate, int updatedRecurringInterval) {
+    public static void updateTask(MaintenanceTask task, String updatedName, LocalDate updatedCreationDate, int updatedRecurringInterval, boolean isCompleted, LocalDate dueDate) {
         task.setName(updatedName);
         task.setCreationDate(updatedCreationDate);
+        task.setDueDate(dueDate);
         if (task.getClass() == RecurringTask.class) {
             ((RecurringTask) task).setRecurringIntervalMonths(updatedRecurringInterval);
+        }
+        if (isCompleted) {
+            task.setCompletedNow();
+        } else {
+            task.setAsNotCompleted();
         }
         maintenanceFile.updateTask(task);
     }
 
+    /**
+     * Saves the active maintenance file to the database
+     */
     public static void saveMaintenanceFile() {
         ArrayList<UUID> addedTasks = maintenanceFile.getAddedTasksIds();
         ArrayList<UUID> modiefiedTasks = maintenanceFile.getModifiedTaskIds();
@@ -129,7 +191,7 @@ public class MaintenanceFileService {
         });
     }
 
-    private static void getTasksFromDatabase() {
+    public static void getTasksFromDatabase() {
         ResultSet result = DatabaseController.getMaintenanceFileTasks(maintenanceFile.getId());
 
         MaintenanceTask task;
@@ -171,6 +233,16 @@ public class MaintenanceFileService {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
+
     }
 
+    /**
+     * Delete maintenance file from database
+     *
+     * @param id the uuid of the file to delete
+     */
+    public static void deleteMaintenanceFile(UUID id) {
+        maintenanceFile = null;
+        DatabaseController.deleteMaintenanceFile(id);
+    }
 }

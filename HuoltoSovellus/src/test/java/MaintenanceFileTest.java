@@ -42,8 +42,19 @@ public class MaintenanceFileTest {
 
     @Test
     public void canCreateMaintenancFile() {
-        MaintenanceFile maintenanceFile = new MaintenanceFile(UUID.randomUUID(), "test file");
+        UUID uuid = UUID.randomUUID();
+        MaintenanceFile maintenanceFile = new MaintenanceFile(uuid, "test file");
         assertEquals(maintenanceFile.getClass(), MaintenanceFile.class);
+        assertEquals(maintenanceFile.getName(), "test file");
+        assertEquals(maintenanceFile.getId(), uuid);
+    }
+
+    @Test
+    public void canChangeNameFile() {
+        file.setName("new name");
+        assertEquals(file.getName(), "new name");
+        String name = file.getName();
+        assertEquals(name, "new name");
     }
 
     @Test
@@ -58,6 +69,5 @@ public class MaintenanceFileTest {
         tasks = file.getTasks();
         assertEquals(tasks.size(), 3);
         assertEquals(tasks.get(task2.getID()), task2);
-
     }
 }

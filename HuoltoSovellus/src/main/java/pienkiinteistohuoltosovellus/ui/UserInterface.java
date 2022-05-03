@@ -28,14 +28,16 @@ public class UserInterface extends Application {
     public void init() throws Exception {
         root = new BorderPane();
         maintenanceFile = MaintenanceFileService.getDefaultMaintenanceFile();
+        
     }
 
     @Override
     public void start(Stage primaryStage) throws Exception {
         root.setTop(createMenu());
         root.setCenter(ViewPane.getInstance());
-        mainScene = new Scene(root, 960, 600);
-
+        mainScene = new Scene(root, 960, 600);        
+        
+        primaryStage.setTitle("Mainetnance file: " + maintenanceFile.getName());
         primaryStage.setMaximized(true);
         primaryStage.setScene(mainScene);
 
@@ -67,7 +69,4 @@ public class UserInterface extends Application {
         return menu;
     }
 
-    private void openFile(File file) {
-
-    }
 }

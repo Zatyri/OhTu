@@ -62,6 +62,10 @@ public class MaintenanceTaskTest {
         task.setCompletedOnDate(date);
         assertEquals(task.getIsCompleted(), true);
         assertEquals(task.getCompletedOnDate(), date);
+        
+        LocalDate date2 = LocalDate.of(2022, 5, 28);
+        task.setCompletedOnDate(date2);
+        assertEquals(task.getCompletedOnDate(), date);
     }
 
     @Test
@@ -69,6 +73,15 @@ public class MaintenanceTaskTest {
         task.setCompletedNow();
         assertEquals(task.getIsCompleted(), true);
         assertEquals(task.getCompletedOnDate(), LocalDate.now());
+        // test again to make sure condition works
+        task.setCompletedNow();
+        assertEquals(task.getIsCompleted(), true);
+        assertEquals(task.getCompletedOnDate(), LocalDate.now());
+
+        task.setAsNotCompleted();
+        assertEquals(task.getIsCompleted(), false);
+        assertEquals(task.getCompletedOnDate(), null);
+        // test again to make sure condition works
         task.setAsNotCompleted();
         assertEquals(task.getIsCompleted(), false);
         assertEquals(task.getCompletedOnDate(), null);
@@ -84,5 +97,6 @@ public class MaintenanceTaskTest {
         LocalDate date = LocalDate.of(2022, 5, 30);
         task.setDueDate(date);
         assertEquals(task.getDueDate(), date);
+
     }
 }

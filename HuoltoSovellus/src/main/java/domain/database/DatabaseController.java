@@ -10,9 +10,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Map;
 import java.util.UUID;
 import org.sqlite.SQLiteConfig;
 
+/**
+ * Controls data flow to the database
+ *
+ */
 public class DatabaseController {
 
     private static Connection connection = null;
@@ -32,6 +37,9 @@ public class DatabaseController {
         return connection;
     }
 
+    /**
+     * Initializes the database by creating required tables if they do not exist
+     */
     public static void initializeDatabase() {
 
         String sqlCreateMaintenanceFilesTable = "CREATE TABLE IF NOT EXISTS maintenanceFiles ("
@@ -70,6 +78,11 @@ public class DatabaseController {
         }
     }
 
+    /**
+     * Gets all maintenance files from database
+     *
+     * @return SQL Result set of maintenance files
+     */
     public static ResultSet getMaintenanceFiles() {
         String sqlGetMaintenanceFiles = "SELECT id, uuid, name, isDefault FROM maintenanceFiles";
         ResultSet resultSet = null;
@@ -86,6 +99,12 @@ public class DatabaseController {
         return resultSet;
     }
 
+    /**
+     * Gets specific maintenance file from database
+     *
+     * @param id of the wanted maintenance file
+     * @return array of strings. [0] = uuid, [1] = name, [2] = database index id
+     */
     public static String[] getMaintenanceFile(UUID id) {
         String sqlGetMaintenanceFile = "SELECT id, uuid, name FROM maintenanceFiles WHERE uuid = ?";
         String[] result = new String[3];
@@ -109,6 +128,11 @@ public class DatabaseController {
         return result;
     }
 
+    /**
+     * Gets default maintenance file from database
+     *
+     * @return array of strings. [0] = uuid, [1] = name, [2] = database index id
+     */
     public static String[] getDefaultMaintenanceFile() {
         String sqlGetMaintenanceFile = "SELECT id, uuid, name, isDefault "
                 + "FROM maintenanceFiles "
@@ -132,6 +156,14 @@ public class DatabaseController {
         return result;
     }
 
+    /**
+     * Adds maintenance file to database
+     *
+     * @param uuid of the maintenance file
+     * @param name of the maintenance file
+     * @param isDefault if maintenance file is set as default
+     * @return true if procedure is success, otherwise false
+     */
     public static Boolean addMaintenanceFile(UUID uuid, String name, int isDefault) {
         String sqlAddMaintenanceFile = "INSERT INTO maintenanceFiles(uuid, name, isDefault) VALUES(?,?,?)";
         Boolean isSuccess = false;
@@ -172,7 +204,13 @@ public class DatabaseController {
         }
     }
 
-    public static void addTask(UUID maintenanceFileId, MaintenanceTask task) {
+    /**
+     * Add task to database
+     *
+     * @param maintenanceFileId uuid of the maintenance file the task belongs to
+     * @param task the task to add to the database
+     */
+    public static boolean addTask(UUID maintenanceFileId, MaintenanceTask task) {
         String sqlAddTask = "INSERT INTO maintenanceTasks(uuid, name, creationDate, "
                 + "completedOnDate, dueDate, isCompleted, recurringIntervalMonths) "
                 + "VALUES(?,?,?,?,?,?,?)";
@@ -222,9 +260,16 @@ public class DatabaseController {
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+            return false;
         }
+        return true;
     }
 
+    /**
+     * Update task in database
+     *
+     * @param task task to update (task should contain data to update)
+     */
     public static void updateTask(MaintenanceTask task) {
         String sqlUpdateTask = "UPDATE maintenanceTasks SET name = ? , "
                 + "creationDate = ? , "
@@ -258,6 +303,11 @@ public class DatabaseController {
         }
     }
 
+    /**
+     * Delete task from database
+     *
+     * @param taskId uuid of the task
+     */
     public static void deleteTask(UUID taskId) {
         String sqlDeleteTask = "DELETE FROM maintenanceTasks WHERE uuid = ?";
 
@@ -274,6 +324,12 @@ public class DatabaseController {
         }
     }
 
+    /**
+     * Get specific maintenance file from database
+     *
+     * @param id uuid of the maintenance file
+     * @return result set of the maintenance file
+     */
     public static ResultSet getMaintenanceFileTasks(UUID id) {
         String sqlSelectTasks = "SELECT uuid, name, creationDate, "
                 + "completedOnDate, dueDate, isCompleted, recurringIntervalMonths "
@@ -298,5 +354,21 @@ public class DatabaseController {
         }
 
         return resultSet;
+    }
+
+    public static void deleteMaintenanceFile(UUID id) {
+        String sqlDeleteMaintenanceFile = "DELETE FROM maintenanceFiles WHERE uuid = ?";
+
+        try {
+            Connection conn = connect();
+
+            PreparedStatement pstmt = conn.prepareStatement(sqlDeleteMaintenanceFile);
+
+            pstmt.setString(1, id.toString());
+
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
     }
 }

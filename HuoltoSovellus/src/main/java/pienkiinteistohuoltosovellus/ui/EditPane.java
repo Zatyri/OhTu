@@ -64,9 +64,9 @@ public class EditPane {
                 setDisable(empty || date.compareTo(LocalDate.now()) > 0);
             }
         });
-        
+
         HBox creationDateHBox = new HBox(creationDateLabel, datePicker);
-        
+
         Label dueDateLabel = new Label("Choose due date:");
         DatePicker dueDatePicker = new DatePicker();
         dueDatePicker.setValue(LocalDate.now());
@@ -134,7 +134,21 @@ public class EditPane {
 
             HBox creationDateHBox = new HBox(creationDateLabel, datePicker);
 
-            tasksVBox.getChildren().add(new VBox(taskHBox, creationDateHBox));
+
+            Label dueDateLabel = new Label("Change due date:");
+            DatePicker dueDatePicker = new DatePicker();
+            dueDatePicker.setValue(task.getDueDate());
+            dueDatePicker.setDayCellFactory(param -> new DateCell() {
+                @Override
+                public void updateItem(LocalDate date, boolean empty) {
+                    super.updateItem(date, empty);
+                    setDisable(empty || date.compareTo(LocalDate.now()) < 0);
+                }
+            });
+            HBox dueDateHBox = new HBox(dueDateLabel, dueDatePicker);
+            
+            tasksVBox.getChildren().add(new VBox(taskHBox, creationDateHBox, dueDateHBox));
+            
 
             TextField recurringTextField = new TextField("");
             if (task.getClass() == RecurringTask.class) {
@@ -151,19 +165,19 @@ public class EditPane {
 
             Button confirmChangesButton = new Button("Confirm changes");
             confirmChangesButton.setOnAction((final ActionEvent e) -> {
-                int recurringInterval = 0;                
+                int recurringInterval = 0;
                 if (task.getClass() == RecurringTask.class) {
                     recurringInterval = Integer.parseInt(recurringTextField.getText());
                 }
-                
-                MaintenanceFileService.updateTask(task, nameTextField.getText(), datePicker.getValue(), recurringInterval);
+
+                MaintenanceFileService.updateTask(task, nameTextField.getText(), datePicker.getValue(), recurringInterval, task.getIsCompleted(), dueDatePicker.getValue());
             });
 
             Button resetChangesButton = new Button("Reset changes");
             resetChangesButton.setOnAction((final ActionEvent e) -> {
                 nameTextField.setText(task.getName());
                 datePicker.setValue(task.getCreationDate());
-
+                dueDatePicker.setValue(task.getDueDate());
                 if (task.getClass() == RecurringTask.class) {
                     recurringTextField.setText((Integer.toString(((RecurringTask) task).getRecurringIntervalMonths())));
                 }

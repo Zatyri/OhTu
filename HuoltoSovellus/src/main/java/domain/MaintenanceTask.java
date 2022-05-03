@@ -3,6 +3,10 @@ package domain;
 import java.time.LocalDate;
 import java.util.UUID;
 
+/**
+ * Base class maintenance tasks
+ * 
+ */
 public class MaintenanceTask {
 
     private UUID id;
@@ -12,6 +16,12 @@ public class MaintenanceTask {
     private LocalDate dueDate;
     private Boolean isCompleted;
 
+    /**
+     * Create task with only name
+     * Other values are generated
+     * 
+     * @param name name of the task
+     */
     public MaintenanceTask(String name) {
         id = UUID.randomUUID();
         this.name = name;
@@ -19,6 +29,13 @@ public class MaintenanceTask {
         creationDate = LocalDate.now();
     }
 
+    /**
+     * Missing properties are generated
+     * 
+     * @param name name of the task
+     * @param creationDate date when task was created
+     * @param dueDate due date of the task
+     */
     public MaintenanceTask(String name, LocalDate creationDate, LocalDate dueDate) {
         id = UUID.randomUUID();
         this.name = name;
@@ -27,6 +44,17 @@ public class MaintenanceTask {
         this.dueDate = dueDate;
     }
 
+    /**
+     * Create task with all properties specified
+     * Used when retrieving task from database
+     * 
+     * @param uuid id of the task
+     * @param name name of the task
+     * @param creationDate creation of the task
+     * @param completedOnDate completion of the task
+     * @param dueDate die date of the task
+     * @param isCompleted is the task completed
+     */
     public MaintenanceTask(UUID uuid, String name, LocalDate creationDate, LocalDate completedOnDate, LocalDate dueDate, Boolean isCompleted) {
         id = uuid;
         this.name = name;
@@ -106,6 +134,7 @@ public class MaintenanceTask {
             isCompleted = true;
         }
     }
+
 
     public void setCompletedNow() {
         if (!isCompleted) {
