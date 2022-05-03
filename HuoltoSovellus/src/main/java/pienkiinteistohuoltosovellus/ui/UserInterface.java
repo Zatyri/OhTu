@@ -2,6 +2,7 @@ package pienkiinteistohuoltosovellus.ui;
 
 import domain.MaintenanceFile;
 import domain.MaintenanceFileService;
+import domain.database.DatabaseController;
 import java.io.File;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -15,6 +16,7 @@ import javafx.stage.Stage;
 public class UserInterface extends Application {
 
     public static void main(String[] args) {
+        DatabaseController.initializeDatabase();
         launch(args);
     }
 
