@@ -10,5 +10,9 @@
 |15.4|2|kehitystyötä view näkymässä|
 |20.4|4|kehitystyötä file näkymässä + tietokanta aloitettu|
 |24.4|5|tietokantakehitystä|
+|29.4|2|tietokantakehitystä|
+|1.5|2|view näkymän työstämistä|
+|2.5|3|tietokantakehitystä + pieniä parannuksia käyttöliittymään|
+|3.5|2|bugikorjausta + testausta|
 
-Yhteensä 25 tuntia
+Yhteensä 34 tuntia
