@@ -122,7 +122,7 @@ public class MaintenanceFileService {
             task = new OneTimeTask(name, creationDate, dueDate);
         }
         maintenanceFile.addTask(task);
-        
+
         return task.getID();
     }
 
@@ -131,7 +131,7 @@ public class MaintenanceFileService {
     }
 
     public static ArrayList<MaintenanceTask> getTasks() {
-        if(maintenanceFile == null){
+        if (maintenanceFile == null) {
             return new ArrayList<>();
         }
         return new ArrayList<>(maintenanceFile.getTasks().values());
