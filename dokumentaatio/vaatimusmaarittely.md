@@ -27,8 +27,8 @@ Näkymät ovat:
 - käyttäjä voi 
 	- luoda uuden huoltosuunnitelman tai ladata olemassa oleva (tehty)
 	- lisätä kertaluontoisia ja toistuvia huoltotoimenpiteitä huoltosuunnitelmaansuunnitelmaan (tehty)
-	- kuitata huoltotoimenpiteet tehdyksi
-	- listata tulevia huoltotoimenpiteitä (tehty osittain)
+	- kuitata huoltotoimenpiteet tehdyksi (tehty)
+	- listata tulevia huoltotoimenpiteitä (tehty)
 	- luoda yhteenveto suoritetuista huoltotoimenpiteistä
 - luodaan valmiita huoltotoimenpideitä
 	
