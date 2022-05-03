@@ -15,3 +15,9 @@
 - Käyttäjä voi luoda uuden huoltosuunnitelman
 - Käyttäjä voi muokata huoltosuunnitelmaa
 - Ohjelmaan lisätty tietokanta ja pysyvä tallennus ominaisuus 
+
+## Viikko 6
+- View ikkunassa voi nyt siirtyä kuukaudesta toiseen
+- Tehtäviä voi nyt merkata tehdyiksi
+- Korjattu bugi jossa tietokanta ei luotu jos ohjelman ajaa .jar tiedoston kautta
+
