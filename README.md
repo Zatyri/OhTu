@@ -11,6 +11,8 @@ This repository is for course *TKT20002* at **Helsinki University**
 
 [arkkitehtuuri.md](https://github.com/Zatyri/ot-harjoitustyo/blob/master/dokumentaatio/arkkitehtuuri.md)
 
+[kayttoohje.md](https://github.com/Zatyri/ot-harjoitustyo/blob/master/dokumentaatio/kayttoohje.md)
+
 ## Julkaisut
 
 [Viikko 5](https://github.com/Zatyri/ot-harjoitustyo/releases/tag/viikko5)
