@@ -6,7 +6,7 @@
 
 Testausta varten on luotu lukuisia sovelluslogiikkaa testaavia automaattitestejä. MaintenanceFile ja MaintenanceTask luokille on tehty yksikkötestejä 
 jotka testaavat luokkien metodeja. MaintenanceFileService luokan eri metodit on myös kattavasti testattu. MaintenanceFileService luokan metodit kutsuvat 
-muiden luokkien metodeja laajasti, joten MaintenanceFileService luokalla suoritetut testit testaavat kattavasti koko ohjelman toimivuutta. 
+muiden luokkien metodeja laajasti, joten MaintenanceFileService luokalla suoritetut testit testaavat kattavasti koko ohjelman toimivuutta ja muiden luokkien yhteentoimivuutta. 
 
 Harmillisesti jäi MaintenanceFileService luokan metodi getTasksFromDatabase() jacocon mielstä suurimmalta osin testaamatta. Jacoco ei "päässyt" if lauseen
 sisälle vaikka metodille tehty testi onnistuu ja sen onnistuminen on selkeästi riippuvainen siitä suorittaako metodi koodia if lauseen sisälle. 
