@@ -25,7 +25,7 @@ Sovellus antaa käyttäjälle mahdollisuuden luoda pienkiinteistölle huolto-ohj
 
 [Viikko 6](https://github.com/Zatyri/ot-harjoitustyo/releases/tag/viikko6)
 
-[Viikko 7](https://github.com/Zatyri/ot-harjoitustyo/releases/tag/viikko7)
+[Loppupalautus](https://github.com/Zatyri/ot-harjoitustyo/releases/tag/viikko7)
 
 ## Komentorivitoiminnot
 
