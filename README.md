@@ -52,6 +52,8 @@ Testikattavuusraportti
 ```
 mvn jacoco:report
 ```
+JavaDocia voi tarkastella avaamalla selaimella tiedosto target/site/apidocs/index.html
+
 
 Checkstyle
 ```
