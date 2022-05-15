@@ -1,12 +1,16 @@
 # Pienkiinteistön huolto ohjelma - Vaatimusmäärittely
 ## Sovelluksen tarkoitus
-Sovellus tarjoaa mahdollisuuden luoda ja ylläpitää pienkiinteistön huoltosuunnitelmaa. Huoltosuunnitelman avulla on helppo seurata milloin tietty huoltotoimenpide on tehtävä
-ja pitää kirjaa tehdyistä huolloista. Huoltosuunnitelma määräytyy tehtävien avulla, joita voidaan lisätä tarpeen mukaan.
+
+Sovellus tarjoaa mahdollisuuden luoda ja ylläpitää pienkiinteistön huoltosuunnitelmaa. Huoltosuunnitelman avulla on helppo seurata milloin tietty huoltotoimenpide on tehtävä ja pitää kirjaa tehdyistä huolloista. Huoltosuunnitelma määräytyy tehtävien avulla, joita voidaan lisätä tarpeen mukaan.
+
 Tehtävät voivat olla kertaluontoisia tai toistuvia. Kertaluontoiset tehtävät ovat huoltotoimenpitäitä joita ei toisteta säännöllisesti, kuten esimerkiksi kattoremontti. 
-Toistuvat tehtävät ovat jatkuvaa huoltoa vaativia tehtäviä, kuten ilmanvaihtokoneen suodattimien vaihto, nuohous tai terassin öljyäminen. Toistuviin tehtäviin voi asettaa aikaväli 
-kuinka tiheästi huoltotoimenpiteet kuuluu suorittaa, ja ohjelma muistuttaa käyttäjää tulevista huoltotoimenpideistä. 
+
+Toistuvat tehtävät ovat jatkuvaa huoltoa vaativia tehtäviä, kuten ilmanvaihtokoneen suodattimien vaihto, nuohous tai terassin öljyäminen. Toistuviin tehtäviin voi asettaa aikaväli kuinka tiheästi huoltotoimenpiteet kuuluu suorittaa, ja ohjelma muistuttaa käyttäjää tulevista huoltotoimenpideistä. 
+
 Ideana on että käyttäjä merkitsee huoltotoimenpiteen suoritetuksi sen jälkeen, jolloin siitä jää jälki milloin, ja kuinka usein jokin toimenpide on tehty. 
-Mikäli ammattilainen on tehnyt huoltotoimenpiteen voidaan se mainita ja ladata jokin todistus tästä, esimerkiksi lasku tai muu dokumentti.
+
+Mikäli ammattilainen on tehnyt huoltotoimenpiteen voidaan se mainita ja ladata jokin todistus tästä, esimerkiksi lasku tai muu dokumentti. Tämä toiminnallisuus ei ole toteutettu ohjelman ensimmäisessä versiossa
+
 Ohjelma antaa mahdollisuuden käyttäjälle luoda yhteenvedon suoritetuista huoltotoimenpiteistä, ja käyttää tätä esimerkiksi kiinteistön myynnin yhteydessä.
 
 ## Käyttäjät
@@ -16,7 +20,7 @@ Sovelluksen työpöytä versiossa ei tule olemaan erillisiä käyttäjiä. Idean
 Sovellus rakennetaan siten, että ylhäällä on navigointipaneeli jossa voidaan vaihtaa eri näkymien välillä.
 Näkymät ovat:
 - File, jossa voi luoda uusi huoltosuunnitelma tai ladata olemassa oleva
-- Edit, jossa voidaan lisätä uusia huoltotoimenpiteitä ja muokata olemassa olevia (Minimun Viable Product (MVP) tehty)
+- Edit, jossa voidaan lisätä uusia huoltotoimenpiteitä ja muokata olemassa olevia
 - View, jossa voidaan katsella tulevia huoltotoimenpiteitä ja kuitata ne tehdyksi
 - Report, jossa voidaan luoda raportti tehdyistä huoltotoimenpiteistä
 
@@ -38,6 +42,7 @@ Näkymät ovat:
 - luoda valmiita huoltotoimenpide pohjia
 - käyttäjä voi
 	- lisätä suoritettuihin huoltotoimenpiteisiin dokumentteja
+	- lisätä mahdollisuus mainita mikäli ammattilainen on tehnyt huoltotoimenpiteen
 	- saada työpöytä ilmoituksia huoltotoimenpiteistä jotka pitää suorittaa nyt
 	- saada sähköposti ilmoitus huoltotoimenpiteistä jotka pitää suorittaa nyt
 - yhdistää sovellus rajapintaan jossa huoltoja tarjoavia yrityksiä (onko sellaista?)
