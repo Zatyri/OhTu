@@ -178,25 +178,37 @@ public class MaintenanceFileService {
      */
     public static void saveMaintenanceFile() {
         ArrayList<UUID> addedTasks = maintenanceFile.getAddedTasksIds();
+        ArrayList<UUID> successfullyAddedTasks = new ArrayList<>();
         ArrayList<UUID> modiefiedTasks = maintenanceFile.getModifiedTaskIds();
+        ArrayList<UUID> successfullyModifiedTasks = new ArrayList<>();
         ArrayList<UUID> deletedTasks = maintenanceFile.getDeletedTaskIds();
+        ArrayList<UUID> successfullyDeletedTasks = new ArrayList<>();
 
         addedTasks.forEach(uuid -> {
             if (DatabaseController.addTask(maintenanceFile.getId(), maintenanceFile.getTasks().get(uuid))) {
-                addedTasks.remove(uuid);
+                successfullyAddedTasks.add(uuid);
             }
+        });
+        successfullyAddedTasks.forEach(uuid -> {
+            addedTasks.remove(uuid);
         });
 
         modiefiedTasks.forEach(uuid -> {
             if (DatabaseController.updateTask(maintenanceFile.getTasks().get(uuid))) {
-                modiefiedTasks.remove(uuid);
+                successfullyModifiedTasks.add(uuid);
             }
+        });
+        successfullyModifiedTasks.forEach(uuid -> {
+            modiefiedTasks.remove(uuid);
         });
 
         deletedTasks.forEach(uuid -> {
             if (DatabaseController.deleteTask(uuid)) {
-                deletedTasks.remove(uuid);
+                successfullyDeletedTasks.add(uuid);
             }
+        });
+        successfullyDeletedTasks.forEach(uuid -> {
+            deletedTasks.remove(uuid);
         });
     }
 
