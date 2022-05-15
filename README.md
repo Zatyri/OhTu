@@ -40,6 +40,7 @@ JavaDoc luonti
 ```
 mvn javadoc:javadoc
 ```
+JavaDocia voi tarkastella avaamalla selaimella tiedosto target/site/apidocs/index.html
 
 # Testaus
 
@@ -52,8 +53,6 @@ Testikattavuusraportti
 ```
 mvn jacoco:report
 ```
-JavaDocia voi tarkastella avaamalla selaimella tiedosto target/site/apidocs/index.html
-
 
 Checkstyle
 ```
