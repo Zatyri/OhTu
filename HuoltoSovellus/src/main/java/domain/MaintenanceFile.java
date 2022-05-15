@@ -3,8 +3,6 @@ package domain;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 
 /**
  * MaintenanceFile is a file containing all the MaintenanceTask-tasks
@@ -13,18 +11,32 @@ public class MaintenanceFile {
 
     private UUID id;
     private String name;
+    private Boolean isDefault;
+    private Boolean isNotSaved = false;
     private HashMap<UUID, MaintenanceTask> tasks;
     private ArrayList<UUID> deletedTaskIds;
     private ArrayList<UUID> modifiedTaskIds;
     private ArrayList<UUID> addedTasksIds;
 
-    public MaintenanceFile(UUID uuid, String name) {
+    public MaintenanceFile(UUID uuid, String name, Boolean isDefault) {
         id = uuid;
         this.name = name;
         tasks = new HashMap<>();
         deletedTaskIds = new ArrayList<>();
         modifiedTaskIds = new ArrayList<>();
         addedTasksIds = new ArrayList<>();
+        this.isDefault = isDefault;
+    }
+
+    public MaintenanceFile(UUID uuid, String name, Boolean isDefault, Boolean isNotSaved) {
+        id = uuid;
+        this.name = name;
+        tasks = new HashMap<>();
+        deletedTaskIds = new ArrayList<>();
+        modifiedTaskIds = new ArrayList<>();
+        addedTasksIds = new ArrayList<>();
+        this.isDefault = isDefault;
+        this.isNotSaved = isNotSaved;
     }
 
     /**
@@ -37,8 +49,8 @@ public class MaintenanceFile {
     }
 
     /**
-     * Add Task to MaintenanceFile
-     * Please note that this change is permanent only after separately saving the MaintenanceFile
+     * Add Task to MaintenanceFile Please note that this change is permanent
+     * only after separately saving the MaintenanceFile
      *
      * @param task MaintenanceTask to add to MaintenanceFile
      */
@@ -48,8 +60,8 @@ public class MaintenanceFile {
     }
 
     /**
-     * Delete Task from MaintenanceFile
-     * Please note that this change is permanent only after separately saving the MaintenanceFile
+     * Delete Task from MaintenanceFile Please note that this change is
+     * permanent only after separately saving the MaintenanceFile
      *
      * @param task MaintenanceTask to delete from MaintenanceFile
      */
@@ -84,9 +96,10 @@ public class MaintenanceFile {
     }
 
     /**
-     * This method returns all deleted task ID's in this session
-     * Used when saving the MaintenanceFile to database and removing deleted tasks from the database
-     * 
+     * This method returns all deleted task ID's in this session Used when
+     * saving the MaintenanceFile to database and removing deleted tasks from
+     * the database
+     *
      * @return the deletedTaskIds
      */
     public ArrayList<UUID> getDeletedTaskIds() {
@@ -94,9 +107,10 @@ public class MaintenanceFile {
     }
 
     /**
-     * This method returns all modified task ID's in this session
-     * Used when saving the MaintenanceFile to database and updating modified tasks in the database
-     * 
+     * This method returns all modified task ID's in this session Used when
+     * saving the MaintenanceFile to database and updating modified tasks in the
+     * database
+     *
      * @return the modifiedTaskIds
      */
     public ArrayList<UUID> getModifiedTaskIds() {
@@ -104,11 +118,40 @@ public class MaintenanceFile {
     }
 
     /**
-     * This method returns all added task ID's in this session
-     * Used when saving the MaintenanceFile to database and adding new tasks to the database
+     * This method returns all added task ID's in this session Used when saving
+     * the MaintenanceFile to database and adding new tasks to the database
+     *
      * @return the addedTasksIds
      */
     public ArrayList<UUID> getAddedTasksIds() {
         return addedTasksIds;
+    }
+
+    /**
+     * @return the isDefault
+     */
+    public Boolean getIsDefault() {
+        return isDefault;
+    }
+
+    /**
+     * @param isDefault the isDefault to set
+     */
+    public void setIsDefault(Boolean isDefault) {
+        this.isDefault = isDefault;
+    }
+
+    /**
+     * @return the isNotSaved
+     */
+    public Boolean getIsNotSaved() {
+        return isNotSaved;
+    }
+
+    /**
+     * @param isNotSaved the isNotSaved to set
+     */
+    public void setIsNotSaved(Boolean isNotSaved) {
+        this.isNotSaved = isNotSaved;
     }
 }

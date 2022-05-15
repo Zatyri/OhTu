@@ -5,13 +5,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.Month;
-import java.time.Year;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
-import javafx.collections.ObservableList;
 
 /**
  * Class to allow ui to access data
@@ -26,10 +23,10 @@ public class MaintenanceFileService {
     private static void initializeMaintenanceFile() {
         String[] result = DatabaseController.getDefaultMaintenanceFile();
         if (result[0] != null) {
-            maintenanceFile = new MaintenanceFile(UUID.fromString(result[0]), result[1]);
+            maintenanceFile = new MaintenanceFile(UUID.fromString(result[0]), result[1], result[3].equals("1"));
             getTasksFromDatabase();
         } else {
-            maintenanceFile = new MaintenanceFile(UUID.randomUUID(), "Unnamed");
+            maintenanceFile = new MaintenanceFile(UUID.randomUUID(), "Unnamed", false, true);
         }
 
         // get tasks with result[2]
@@ -59,7 +56,7 @@ public class MaintenanceFileService {
         String[] result = DatabaseController.getMaintenanceFile(uuid);
 
         if (result[0] != null) {
-            maintenanceFile = new MaintenanceFile(UUID.fromString(result[0]), result[1]);
+            maintenanceFile = new MaintenanceFile(UUID.fromString(result[0]), result[1], result[3].equals("1"));
             getTasksFromDatabase();
         }
 
@@ -77,7 +74,7 @@ public class MaintenanceFileService {
         try {
             ResultSet result = DatabaseController.getMaintenanceFiles();
             while (result.next()) {
-                maintenanceFiles.add(new MaintenanceFile(UUID.fromString(result.getString("uuid")), result.getString("name")));
+                maintenanceFiles.add(new MaintenanceFile(UUID.fromString(result.getString("uuid")), result.getString("name"), result.getInt("isDefault") == 1));
             }
 
         } catch (SQLException e) {
@@ -98,7 +95,7 @@ public class MaintenanceFileService {
     public static void createMaintenanceFile(String name, Boolean isDefault) {
         UUID id = UUID.randomUUID();
         int isDefaultInt = isDefault ? 1 : 0;
-        maintenanceFile = new MaintenanceFile(id, name);
+        maintenanceFile = new MaintenanceFile(id, name, isDefault);
 
         DatabaseController.addMaintenanceFile(id, name, isDefaultInt);
     }
@@ -118,10 +115,12 @@ public class MaintenanceFileService {
         MaintenanceTask task;
         if (recurringTime > 0) {
             task = new RecurringTask(name, creationDate, recurringTime, dueDate);
+            maintenanceFile.addTask(task);
+
         } else {
             task = new OneTimeTask(name, creationDate, dueDate);
+            maintenanceFile.addTask(task);
         }
-        maintenanceFile.addTask(task);
 
         return task.getID();
     }
@@ -164,6 +163,10 @@ public class MaintenanceFileService {
         }
         if (isCompleted) {
             task.setCompletedNow();
+            if (task.getClass() == RecurringTask.class && !((RecurringTask) task).getMarkedCompletedInInstance()) {
+                createTask(updatedName, updatedCreationDate, dueDate.plusMonths(updatedRecurringInterval), updatedRecurringInterval);
+                ((RecurringTask) task).setMarkedCompletedInInstance(true);
+            }
         } else {
             task.setAsNotCompleted();
         }
@@ -179,19 +182,30 @@ public class MaintenanceFileService {
         ArrayList<UUID> deletedTasks = maintenanceFile.getDeletedTaskIds();
 
         addedTasks.forEach(uuid -> {
-            DatabaseController.addTask(maintenanceFile.getId(), maintenanceFile.getTasks().get(uuid));
+            if (DatabaseController.addTask(maintenanceFile.getId(), maintenanceFile.getTasks().get(uuid))) {
+                addedTasks.remove(uuid);
+            }
         });
 
         modiefiedTasks.forEach(uuid -> {
-            DatabaseController.updateTask(maintenanceFile.getTasks().get(uuid));
+            if (DatabaseController.updateTask(maintenanceFile.getTasks().get(uuid))) {
+                modiefiedTasks.remove(uuid);
+            }
         });
 
         deletedTasks.forEach(uuid -> {
-            DatabaseController.deleteTask(uuid);
+            if (DatabaseController.deleteTask(uuid)) {
+                deletedTasks.remove(uuid);
+            }
         });
     }
 
-    public static void getTasksFromDatabase() {
+    /**
+     * Gets all tasks from database
+     *
+     * @return true if successful, false if not
+     */
+    public static Boolean getTasksFromDatabase() {
         ResultSet result = DatabaseController.getMaintenanceFileTasks(maintenanceFile.getId());
 
         MaintenanceTask task;
@@ -229,9 +243,11 @@ public class MaintenanceFileService {
 
                 maintenanceFile.getTasks().put(id, task);
             }
+            return true;
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+            return false;
         }
 
     }
@@ -242,7 +258,47 @@ public class MaintenanceFileService {
      * @param id the uuid of the file to delete
      */
     public static void deleteMaintenanceFile(UUID id) {
-        maintenanceFile = null;
         DatabaseController.deleteMaintenanceFile(id);
+        if (id.toString().equals(maintenanceFile.getId().toString())) {
+            maintenanceFile = null;
+            getDefaultMaintenanceFile();
+        }
+    }
+
+    /**
+     * Sets maintenance file as default
+     *
+     * @param id the maintenance file uuid to set as default
+     */
+    public static void setMaintenanceFileAsDefault(UUID id) {
+        DatabaseController.setMaintenanceFileAsDefault(id);
+    }
+
+    /**
+     * Updated the maintenance file
+     *
+     * @param id of the maintenance file
+     * @param newName new name of the maintenance file
+     */
+    public static void updateMaintenanceFile(UUID id, String newName) {
+        DatabaseController.updateMaintenanceFile(id, newName);
+    }
+
+    /**
+     * Get task that are not completed and are over due date
+     *
+     * @return tasks that are not completed and are over due date
+     */
+    public static List<MaintenanceTask> getOverDueTasks() {
+        LocalDate dateNow = LocalDate.now();
+        return maintenanceFile.getTasks().values().stream()
+                .filter(f -> f.getDueDate().isBefore(dateNow) && !f.getIsCompleted())
+                .collect(Collectors.toList());
+    }
+
+    public static List<MaintenanceTask> getCompletedTasks() {
+        return maintenanceFile.getTasks().values().stream()
+                .filter(f -> f.getIsCompleted())
+                .collect(Collectors.toList());
     }
 }

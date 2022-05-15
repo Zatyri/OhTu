@@ -30,7 +30,7 @@ public class MaintenanceFileTest {
 
     @Before
     public void setUp() {
-        file = new MaintenanceFile(UUID.randomUUID(), "test file");
+        file = new MaintenanceFile(UUID.randomUUID(), "test file", false);
 
     }
 
@@ -43,7 +43,7 @@ public class MaintenanceFileTest {
     @Test
     public void canCreateMaintenancFile() {
         UUID uuid = UUID.randomUUID();
-        MaintenanceFile maintenanceFile = new MaintenanceFile(uuid, "test file");
+        MaintenanceFile maintenanceFile = new MaintenanceFile(uuid, "test file", false);
         assertEquals(maintenanceFile.getClass(), MaintenanceFile.class);
         assertEquals(maintenanceFile.getName(), "test file");
         assertEquals(maintenanceFile.getId(), uuid);

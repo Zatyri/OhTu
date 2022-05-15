@@ -4,23 +4,16 @@ import domain.MaintenanceFileService;
 import domain.MaintenanceTask;
 import domain.RecurringTask;
 import java.time.LocalDate;
-import java.time.Month;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 import javafx.event.ActionEvent;
-import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 
 public class ViewPane {
 
@@ -41,6 +34,7 @@ public class ViewPane {
 
         }
         createMonthViewPane();
+        createOverDueDateTaskFlowPane();
 
         return borderPane;
     }
@@ -62,6 +56,7 @@ public class ViewPane {
 
         Label currentMonthLabel = new Label(displayDate.getMonth().toString().toLowerCase() + " - " + String.valueOf(displayDate.getYear()));
         HBox menuHBox = new HBox(prevMonthButton, currentMonthLabel, nextMonthButton);
+        menuHBox.setAlignment(Pos.CENTER);
 
         borderPane.setTop(menuHBox);
         createMonthFlowPane();
@@ -94,6 +89,7 @@ public class ViewPane {
                     MaintenanceFileService.updateTask(task, task.getName(), task.getCreationDate(), 0, false, task.getDueDate());
                 }
                 createMonthFlowPane();
+                createOverDueDateTaskFlowPane();
             });
         } else {
             isCompletedLabel = new Label("Task not yet completed. Due date on: " + task.getDueDate().toString());
@@ -105,6 +101,7 @@ public class ViewPane {
                     MaintenanceFileService.updateTask(task, task.getName(), task.getCreationDate(), 0, true, task.getDueDate());
                 }
                 createMonthFlowPane();
+                createOverDueDateTaskFlowPane();
 
             });
         }
@@ -116,6 +113,25 @@ public class ViewPane {
 
     private static List<MaintenanceTask> getDisplayDateTasks() {
         return MaintenanceFileService.getTasks(displayDate.getYear(), displayDate.getMonth());
+    }
+
+    private static void createOverDueDateTaskFlowPane() {
+        Label overDueLabel = new Label("Over due tasks");
+        FlowPane taskFlowPane = new FlowPane();
+        List<MaintenanceTask> tasks = MaintenanceFileService.getOverDueTasks();
+
+        VBox overDueVbox;
+        if (tasks.isEmpty()) {
+            Label noOverDueTasksLabel = new Label("No over due tasks at the moment");
+            overDueVbox = new VBox(overDueLabel, noOverDueTasksLabel);
+        } else {
+            tasks.forEach(task -> {
+                taskFlowPane.getChildren().add(createTaskDisplayVBox(task));
+            });
+            overDueVbox = new VBox(overDueLabel, taskFlowPane);
+        }
+        
+        borderPane.setRight(overDueVbox);
     }
 
 }

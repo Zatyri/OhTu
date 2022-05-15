@@ -7,7 +7,7 @@ import pienkiinteistohuoltosovellus.ui.UserInterface;
 public class HuoltoSovellus {
 
     public static void main(String[] args) {
-        DatabaseController.initializeDatabase();
+        DatabaseController.initializeDatabase(null);
         UserInterface.main(args);       
 
     }

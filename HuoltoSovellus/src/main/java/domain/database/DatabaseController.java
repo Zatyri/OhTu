@@ -2,15 +2,12 @@ package domain.database;
 
 import domain.MaintenanceTask;
 import domain.RecurringTask;
-import java.io.File;
 import java.sql.Connection;
-import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Map;
 import java.util.UUID;
 import org.sqlite.SQLiteConfig;
 
@@ -21,9 +18,11 @@ import org.sqlite.SQLiteConfig;
 public class DatabaseController {
 
     private static Connection connection = null;
+    private static String dbName = "MaintenanceFileDB";
 
     private static Connection connect() {
-        String url = "jdbc:sqlite:MaintenanceFileDB";
+
+        String url = "jdbc:sqlite:" + dbName;
 
         try {
             SQLiteConfig config = new SQLiteConfig();
@@ -39,8 +38,13 @@ public class DatabaseController {
 
     /**
      * Initializes the database by creating required tables if they do not exist
+     *
+     * @param dbName name of the database. Used only for testing purposes
      */
-    public static void initializeDatabase() {
+    public static void initializeDatabase(String dbName) {
+        if (dbName != null) {
+            DatabaseController.dbName = dbName;
+        }
 
         String sqlCreateMaintenanceFilesTable = "CREATE TABLE IF NOT EXISTS maintenanceFiles ("
                 + "id INTEGER PRIMARY KEY AUTOINCREMENT, "
@@ -103,11 +107,12 @@ public class DatabaseController {
      * Gets specific maintenance file from database
      *
      * @param id of the wanted maintenance file
-     * @return array of strings. [0] = uuid, [1] = name, [2] = database index id
+     * @return array of strings. [0] = uuid, [1] = name, [2] = database index
+     * id, [3] = isDefault
      */
     public static String[] getMaintenanceFile(UUID id) {
-        String sqlGetMaintenanceFile = "SELECT id, uuid, name FROM maintenanceFiles WHERE uuid = ?";
-        String[] result = new String[3];
+        String sqlGetMaintenanceFile = "SELECT id, uuid, name, isDefault FROM maintenanceFiles WHERE uuid = ?";
+        String[] result = new String[4];
 
         try {
             Connection conn = connect();
@@ -120,6 +125,7 @@ public class DatabaseController {
             result[0] = resultSet.getString("uuid");
             result[1] = resultSet.getString("name");
             result[2] = resultSet.getString("id");
+            result[3] = String.valueOf(resultSet.getInt("isDefault"));
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -131,13 +137,14 @@ public class DatabaseController {
     /**
      * Gets default maintenance file from database
      *
-     * @return array of strings. [0] = uuid, [1] = name, [2] = database index id
+     * @return array of strings. [0] = uuid, [1] = name, [2] = database index
+     * id, [3] = isDefault
      */
     public static String[] getDefaultMaintenanceFile() {
         String sqlGetMaintenanceFile = "SELECT id, uuid, name, isDefault "
                 + "FROM maintenanceFiles "
                 + "WHERE isDefault = 1";
-        String[] result = new String[3];
+        String[] result = new String[4];
 
         try {
             Connection conn = connect();
@@ -148,6 +155,7 @@ public class DatabaseController {
             result[0] = resultSet.getString("uuid");
             result[1] = resultSet.getString("name");
             result[2] = resultSet.getString("id");
+            result[3] = String.valueOf(resultSet.getInt("isDefault"));
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -190,8 +198,7 @@ public class DatabaseController {
     }
 
     private static void resetIsDefaultValues() {
-        String sqlResetDefaultValues = "UPDATE maintenanceFiles SET isDefault = 0 , "
-                + "WHERE id = *";
+        String sqlResetDefaultValues = "UPDATE maintenanceFiles SET isDefault = 0";
 
         try {
             Connection conn = connect();
@@ -209,6 +216,7 @@ public class DatabaseController {
      *
      * @param maintenanceFileId uuid of the maintenance file the task belongs to
      * @param task the task to add to the database
+     * @return true if success, false if fail
      */
     public static boolean addTask(UUID maintenanceFileId, MaintenanceTask task) {
         String sqlAddTask = "INSERT INTO maintenanceTasks(uuid, name, creationDate, "
@@ -234,6 +242,7 @@ public class DatabaseController {
                 pstmt1.setString(5, task.getDueDate().toString());
             }
             pstmt1.setInt(6, task.getIsCompleted() ? 1 : 0);
+
             if (task.getClass() == RecurringTask.class) {
                 pstmt1.setInt(7, ((RecurringTask) task).getRecurringIntervalMonths());
             }
@@ -269,8 +278,9 @@ public class DatabaseController {
      * Update task in database
      *
      * @param task task to update (task should contain data to update)
+     * @return true if successful, false if not
      */
-    public static void updateTask(MaintenanceTask task) {
+    public static Boolean updateTask(MaintenanceTask task) {
         String sqlUpdateTask = "UPDATE maintenanceTasks SET name = ? , "
                 + "creationDate = ? , "
                 + "completedOnDate = ? , "
@@ -292,23 +302,28 @@ public class DatabaseController {
                 pstmt.setString(4, task.getDueDate().toString());
             }
             pstmt.setInt(5, task.getIsCompleted() ? 1 : 0);
+
             if (task.getClass() == RecurringTask.class) {
-                pstmt.setInt(6, ((RecurringTask) task).getRecurringIntervalMonths());
+                pstmt.setInt(
+                        6, ((RecurringTask) task).getRecurringIntervalMonths());
             }
             pstmt.setString(7, task.getID().toString());
 
             pstmt.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+            return false;
         }
+        return true;
     }
 
     /**
      * Delete task from database
      *
      * @param taskId uuid of the task
+     * @return true if successful, false if not
      */
-    public static void deleteTask(UUID taskId) {
+    public static Boolean deleteTask(UUID taskId) {
         String sqlDeleteTask = "DELETE FROM maintenanceTasks WHERE uuid = ?";
 
         try {
@@ -321,7 +336,9 @@ public class DatabaseController {
             pstmt.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+            return false;
         }
+        return true;
     }
 
     /**
@@ -365,6 +382,54 @@ public class DatabaseController {
             PreparedStatement pstmt = conn.prepareStatement(sqlDeleteMaintenanceFile);
 
             pstmt.setString(1, id.toString());
+
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    /**
+     * Sets maintenance file as default
+     *
+     * @param id the maintenance file uuid to set as default
+     */
+    public static void setMaintenanceFileAsDefault(UUID id) {
+        String sqlsetDefaultMaintenanceFile = "UPDATE maintenanceFiles SET isDefault = 1 "
+                + "WHERE uuid = ?";
+
+        resetIsDefaultValues();
+
+        try {
+            Connection conn = connect();
+
+            PreparedStatement pstmt = conn.prepareStatement(sqlsetDefaultMaintenanceFile);
+
+            pstmt.setString(1, id.toString());
+
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    /**
+     * Updates the maintenance file
+     *
+     * @param id the maintenance file uuid to set as default
+     * @param newName the new name of the maintenance file
+     */
+    public static void updateMaintenanceFile(UUID id, String newName) {
+        String sqlUpdateMaintenanceFile = "UPDATE maintenanceFiles SET name = ? "
+                + "WHERE uuid = ?";
+
+        try {
+            Connection conn = connect();
+
+            PreparedStatement pstmt = conn.prepareStatement(sqlUpdateMaintenanceFile);
+
+            pstmt.setString(1, newName);
+            pstmt.setString(2, id.toString());
 
             pstmt.executeUpdate();
         } catch (SQLException e) {

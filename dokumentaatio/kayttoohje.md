@@ -10,7 +10,7 @@ Tietokanta tiedoston nimi on MaintenanceFileDB
 
 ## Ohjelman käynnistäminen
 
-Kaksoisklikkaa HuoltoSovellus-1.0-SNAPSHOT.jar tiedostoa
+Kaksoisklikkaa HuoltoSovellus-1.0-SNAPSHOT.jar tiedostoa.
 
 ## Ohjelman logiikka
 
@@ -20,7 +20,7 @@ Jos oletus huolto-ohjelmaa (Maintenance File) ei löydy tietokannasa (esimerkiks
 ### File
 
 File näkymässä voi käyttäjä luoda, valita ja muokkaa huolto-ohjelmia (Maintenance File). Huolto-ohjelma sisältää kaikki siihen liittyvät huoltotoimenpiteet.
-File näkymässä tallennat myös tehdyt muutokset. Ilman erillistä tallentamista häviävät tehdyt muutokset kun ohjelma suljetaan.
+File näkymässä tallennat myös tehdyt muutokset. HUOM! Ilman erillistä tallentamista häviävät tehdyt muutokset kun ohjelma suljetaan.
 
 ### Edit
 
@@ -28,7 +28,9 @@ Edit näkymässä voit lisätä huolto-ohjelmaan, muokata ja poistaa niitä.
 
 ### View
 
-View näkymä näyttää nykyisen kuukauden huoltotoimenpiteet. Nuolilla voit siirtyä edellisiin tai seuraaviin kuukausiin
+View näkymä näyttää nykyisen kuukauden huoltotoimenpiteet. Nuolilla voit siirtyä edellisiin tai seuraaviin kuukausiin.
+View näkymän kautta voit merkata huoltotoimenpide tehdyksi.
+View näkymä näyttää oikealla ei suoritettuja huoltotoimenpiteitä joiden eräpäivä on mennyt
 
 ### Report
 

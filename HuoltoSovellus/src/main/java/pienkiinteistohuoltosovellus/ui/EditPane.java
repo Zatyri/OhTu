@@ -9,6 +9,7 @@ import java.util.Optional;
 import javafx.beans.binding.Bindings;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
+import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
@@ -43,11 +44,17 @@ public class EditPane {
         });
 
         HBox menuVBox = new HBox(createNewTaskButton, editTaskButton);
+        menuVBox.setAlignment(Pos.CENTER);
 
         borderPane.setTop(menuVBox);
     }
 
     private static VBox showTaskCreationVBox() {
+
+        if (MaintenanceFileService.getDefaultMaintenanceFile().getIsNotSaved()) {
+            Label label = new Label("Create a maintenance file in File section first");
+            return new VBox(label);
+        }
         Label label = new Label("Create new task");
 
         Label nameLabel = new Label("Task name:");
@@ -92,6 +99,9 @@ public class EditPane {
         addNewTaskButton.disableProperty().bind(Bindings.isEmpty(nameTextField.textProperty()));
 
         addNewTaskButton.setOnAction((final ActionEvent e) -> {
+            if (MaintenanceFileService.getDefaultMaintenanceFile().getIsNotSaved()) {
+                return;
+            }
             String name = nameTextField.getText();
             LocalDate creationDate = datePicker.getValue();
             LocalDate dueDate = dueDatePicker.getValue();
@@ -110,6 +120,10 @@ public class EditPane {
     }
 
     private static VBox showTaskEditVBox() {
+        if (MaintenanceFileService.getDefaultMaintenanceFile().getIsNotSaved()) {
+            Label label = new Label("Create a maintenance file in File section first");
+            return new VBox(label);
+        }
         Label label = new Label("Edit tasks");
 
         VBox tasksVBox = new VBox(label);
@@ -134,7 +148,6 @@ public class EditPane {
 
             HBox creationDateHBox = new HBox(creationDateLabel, datePicker);
 
-
             Label dueDateLabel = new Label("Change due date:");
             DatePicker dueDatePicker = new DatePicker();
             dueDatePicker.setValue(task.getDueDate());
@@ -146,9 +159,8 @@ public class EditPane {
                 }
             });
             HBox dueDateHBox = new HBox(dueDateLabel, dueDatePicker);
-            
+
             tasksVBox.getChildren().add(new VBox(taskHBox, creationDateHBox, dueDateHBox));
-            
 
             TextField recurringTextField = new TextField("");
             if (task.getClass() == RecurringTask.class) {

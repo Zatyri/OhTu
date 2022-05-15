@@ -9,6 +9,7 @@ import java.util.UUID;
 public class RecurringTask extends MaintenanceTask {
 
     private int recurringIntervalMonths;
+    private Boolean markedCompletedInInstance = false;
 
     public RecurringTask(String name, LocalDate creationDate, int recurringIntervalInMonths, LocalDate dueDate) {
         super(name, creationDate, dueDate);
@@ -32,6 +33,20 @@ public class RecurringTask extends MaintenanceTask {
      */
     public void setRecurringIntervalMonths(int recurringIntervalMonths) {
         this.recurringIntervalMonths = recurringIntervalMonths;
+    }
+
+    /**
+     * @return the markedCompletedInInstance
+     */
+    public Boolean getMarkedCompletedInInstance() {
+        return markedCompletedInInstance;
+    }
+
+    /**
+     * @param markedCompletedInInstance the markedCompletedInInstance to set
+     */
+    public void setMarkedCompletedInInstance(Boolean markedCompletedInInstance) {
+        this.markedCompletedInInstance = markedCompletedInInstance;
     }
     
     

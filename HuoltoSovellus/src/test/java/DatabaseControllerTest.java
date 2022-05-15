@@ -1,9 +1,8 @@
 
 import domain.MaintenanceFileService;
-import domain.MaintenanceTask;
 import domain.OneTimeTask;
+import domain.RecurringTask;
 import domain.database.DatabaseController;
-import java.sql.ResultSet;
 import java.time.LocalDate;
 import java.util.UUID;
 import org.junit.After;
@@ -22,6 +21,7 @@ public class DatabaseControllerTest {
 
     @BeforeClass
     public static void setUpClass() {
+        DatabaseController.initializeDatabase(":memory:");
     }
 
     @AfterClass
@@ -30,8 +30,8 @@ public class DatabaseControllerTest {
 
     @Before
     public void setUp() {
-        DatabaseController.initializeDatabase();
-        MaintenanceFileService.createMaintenanceFile("test file", true);
+
+        MaintenanceFileService.createMaintenanceFile("database test file", true);
         uuid = MaintenanceFileService.getDefaultMaintenanceFile().getId();
         MaintenanceFileService.saveMaintenanceFile();
         MaintenanceFileService.createTask("task recurring", LocalDate.now(), LocalDate.now(), 12);
@@ -45,15 +45,38 @@ public class DatabaseControllerTest {
     }
 
     @Test
-    public void testAddTask() {
-       OneTimeTask task = new OneTimeTask("test", LocalDate.now(), LocalDate.now());
-       
-       assertEquals(DatabaseController.addTask(uuid, task), true);
+    public void testAddOneTimeTask() {
+        OneTimeTask task = new OneTimeTask(UUID.randomUUID(), "test", LocalDate.now(), LocalDate.now(), LocalDate.now(), false);
+        assertEquals(DatabaseController.addTask(uuid, task), true);
     }
-    
+
     @Test
-    public void canGetDefaultMaintenanceFile(){
-        assertEquals(DatabaseController.getDefaultMaintenanceFile()[1], "test file");
+    public void testAddRecurringTask() {
+        RecurringTask task = new RecurringTask(UUID.randomUUID(), "test", LocalDate.now(), LocalDate.now(), LocalDate.now(), false, 12);
+        assertEquals(DatabaseController.addTask(uuid, task), true);
+    }
+
+    @Test
+    public void testUpdateOneTimeTask() {
+        UUID id = UUID.randomUUID();
+        OneTimeTask task = new OneTimeTask(id, "test", LocalDate.now(), LocalDate.now(), LocalDate.now(), false);
+        DatabaseController.addTask(uuid, task);
+        task.setName("updated name");
+
+        assertEquals(DatabaseController.updateTask(task), true);
+    }
+
+    @Test
+    public void testCanGetDefaultMaintenanceFile() {
+        assertEquals(DatabaseController.getDefaultMaintenanceFile()[1], "database test file");
+    }
+
+    @Test
+    public void testCanDeleteTask() {
+        UUID id = UUID.randomUUID();
+        OneTimeTask task = new OneTimeTask(id, "test remove", LocalDate.now(), LocalDate.now(), LocalDate.now(), false);
+        assertEquals(DatabaseController.addTask(uuid, task), true);
+        assertEquals(DatabaseController.deleteTask(id), true);
     }
 
 }

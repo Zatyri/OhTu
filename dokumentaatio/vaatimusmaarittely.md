@@ -25,18 +25,19 @@ Näkymät ovat:
 
 ## Perusversion tarjoama toiminnallisuus
 - käyttäjä voi 
-	- luoda uuden huoltosuunnitelman tai ladata olemassa oleva (tehty)
-	- lisätä kertaluontoisia ja toistuvia huoltotoimenpiteitä huoltosuunnitelmaansuunnitelmaan (tehty)
-	- kuitata huoltotoimenpiteet tehdyksi (tehty)
-	- listata tulevia huoltotoimenpiteitä (tehty)
+	- luoda uuden huoltosuunnitelman tai ladata olemassa oleva
+	- lisätä kertaluontoisia ja toistuvia huoltotoimenpiteitä huoltosuunnitelmaansuunnitelmaan
+	- muokata huoltotoimenpiteitä
+	- kuitata huoltotoimenpiteet tehdyksi
+	- listata tulevia huoltotoimenpiteitä
 	- luoda yhteenveto suoritetuista huoltotoimenpiteistä
-- luodaan valmiita huoltotoimenpideitä
+	- luoda yhteenvedosta pdf tiedosto
+
 	
 ## Jatkokehitysideoita
-Nämä toteutetaan mikäli aikaa on
+- luoda valmiita huoltotoimenpide pohjia
 - käyttäjä voi
 	- lisätä suoritettuihin huoltotoimenpiteisiin dokumentteja
-	- luoda yhteenvedosta pdf tiedosto
 	- saada työpöytä ilmoituksia huoltotoimenpiteistä jotka pitää suorittaa nyt
 	- saada sähköposti ilmoitus huoltotoimenpiteistä jotka pitää suorittaa nyt
 - yhdistää sovellus rajapintaan jossa huoltoja tarjoavia yrityksiä (onko sellaista?)
