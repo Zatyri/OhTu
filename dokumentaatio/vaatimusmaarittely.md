@@ -20,7 +20,7 @@ Näkymät ovat:
 - View, jossa voidaan katsella tulevia huoltotoimenpiteitä ja kuitata ne tehdyksi
 - Report, jossa voidaan luoda raportti tehdyistä huoltotoimenpiteistä
 
-![rough plan of UI](https://github.com/Zatyri/ot-harjoitustyo/blob/master/dokumentaatio/roughPlanOfUI.png)
+![rough plan of UI](https://github.com/Zatyri/ot-harjoitustyo/blob/master/dokumentaatio/kuvat/roughPlanOfUI.png)
 
 
 ## Perusversion tarjoama toiminnallisuus
