@@ -25,4 +25,5 @@
 - Raport näkymän kautta voi nyt luoda pdf raportin tehdyistä huolloista
 - View näkymä näyttää huoltotoimenpiteitä joiden eräpäivä on mennyt eikä vielä suoritettu
 - Ohjelma tarkistaa onko kaikki tallennettu ennen sulkemista ja ilmoittaa mikäli havaitsee tallentamatonta dataa
+- Käyttäjä voi luoda pdf raportin tehdyistä huoltotoimenpiteistä ja tallentaa se
 
