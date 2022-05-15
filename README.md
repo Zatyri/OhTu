@@ -11,9 +11,13 @@ This repository is for course *TKT20002* at **Helsinki University**
 
 [arkkitehtuuri.md](https://github.com/Zatyri/ot-harjoitustyo/blob/master/dokumentaatio/arkkitehtuuri.md)
 
+[kayttoohje.md](https://github.com/Zatyri/ot-harjoitustyo/blob/master/dokumentaatio/kayttoohje.md)
+
 ## Julkaisut
 
 [Viikko 5](https://github.com/Zatyri/ot-harjoitustyo/releases/tag/viikko5)
+
+[Viikko 6](https://github.com/Zatyri/ot-harjoitustyo/releases/tag/viikko6)
 
 ## Komentorivitoiminnot
 
@@ -30,6 +34,11 @@ mvn compile exec:java -Dexec.mainClass=pienkiinteistohuoltosovellus.ui.UserInter
 jar tiedoston luonti
 ```
 mvn package
+```
+
+JavaDoc luonti
+```
+mvn javadoc:javadoc
 ```
 
 # Testaus
