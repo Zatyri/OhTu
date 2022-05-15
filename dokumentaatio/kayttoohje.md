@@ -1,6 +1,6 @@
 # Käyttöohje
 
-Lataa tiedosto [HuoltoSovellus-1.0-SNAPSHOT.jar](https://github.com/Zatyri/ot-harjoitustyo/releases/tag/viikko6)
+Lataa tiedosto [HuoltoSovellus-1.0-SNAPSHOT.jar](https://github.com/Zatyri/ot-harjoitustyo/releases/tag/viikko7)
 
 ## Konfigurointi
 
