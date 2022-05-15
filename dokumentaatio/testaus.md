@@ -21,7 +21,7 @@ Tietokantaa on testattu muistissa sijaitsevan tietokannan avulla.
 Käyttöliittymää lukuunottamatto on ohjelman rivikattavuus 76% ja haarautumiskattavuus 63%. Testikattavuus jäi harmillisen alaiseksi MaintenanceFileService luokassa
 sijaitsevan "puutteen" vuoksi
 
-![testikattavuus](https://github.com/Zatyri/ot-harjoitustyo/blob/master/dokumentaatio/testCoverage.png)
+![testikattavuus](https://github.com/Zatyri/ot-harjoitustyo/blob/master/dokumentaatio/kuvat/testCoverage.png)
 
 ## Järjestelmätestaus
 
