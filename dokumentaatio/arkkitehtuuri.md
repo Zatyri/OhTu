@@ -86,7 +86,7 @@ MaintenaceFileService luokka kutsuu DatabaseController luokkaa kun se haluaa hak
 DatabaseController luo käynnistyken yhteydessä tietokannan ellei sellaista jo ole. Tietokantatiedosto sijaitsee ohjelman juuressa.
 Testausta varten käyttää DatabaseController muistissa sijaitsevaa sqllite tietokantaa.
 
-![sql diagram](https://github.com/Zatyri/ot-harjoitustyo/blob/master/dokumentaatio/sqlDiagram.png)
+![sql diagram](https://github.com/Zatyri/ot-harjoitustyo/blob/master/dokumentaatio/kuvat/sqlDiagram.png)
 
 ### Pdf raportin tallennus
 
