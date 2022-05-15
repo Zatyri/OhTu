@@ -17,6 +17,8 @@ Sovellus antaa käyttäjälle mahdollisuuden luoda pienkiinteistölle huolto-ohj
 
 [kayttoohje.md](https://github.com/Zatyri/ot-harjoitustyo/blob/master/dokumentaatio/kayttoohje.md)
 
+[testausdokumentti.md](https://github.com/Zatyri/ot-harjoitustyo/blob/master/dokumentaatio/testaus.md)
+
 ## Julkaisut
 
 [Viikko 5](https://github.com/Zatyri/ot-harjoitustyo/releases/tag/viikko5)
