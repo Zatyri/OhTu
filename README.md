@@ -2,6 +2,10 @@
 
 This repository is for course *TKT20002* at **Helsinki University**
 
+# HuoltoSovellus
+
+Sovellus antaa käyttäjälle mahdollisuuden luoda pienkiinteistölle huolto-ohjelman. Huolto-ohjelmaan voi lisätä huoltotoimenpitäitä joiden avulla on helppo pitää kirjaa milloin huollot on suoritettava. Sovellus muistaa myös, tehtyjä huoltotoimenpitäitä ja niistä voi luoda raportin josta näkee suoritettuja huoltoja
+
 ## Harjoitustyön dokumetaatio
 [vaatimusmaarittely.md](https://github.com/Zatyri/ot-harjoitustyo/blob/master/dokumentaatio/vaatimusmaarittely.md)
 
