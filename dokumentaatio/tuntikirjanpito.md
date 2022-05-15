@@ -14,5 +14,8 @@
 |1.5|2|view näkymän työstämistä|
 |2.5|3|tietokantakehitystä + pieniä parannuksia käyttöliittymään|
 |3.5|2|bugikorjausta + testausta|
+|11.5|2|ohjelmointia|
+|12.5|2|ohjelmointia|
+|15.5|3|testausta ja dokumentointia|
 
-Yhteensä 34 tuntia
+Yhteensä 41 tuntia
